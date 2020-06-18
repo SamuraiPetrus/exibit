@@ -1,0 +1,19 @@
+[0] => Nome
+
+[1] => Fonte
+[1]["family"] => Família da Fonte
+[1]["size"] => Tamanho da Fonte
+
+[2] => Desktop
+[2]["x"] => Desktop x
+[2]["y"] => Desktop y
+
+[3] => Tablet
+[3]["x"] => Tablet x
+[3]["y"] => Tablet y
+
+[4] => Mobile
+[4]["x"] => Mobile x
+[4]["y"] => Mobile y
+
+[5] => Token
