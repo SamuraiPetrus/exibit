@@ -1,0 +1,81 @@
+/* Geral */
+.exibit{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0 !important;
+}
+.exibit ul, .exibit figure {
+  margin: 0;
+}
+
+/* Painel de controle */
+.settings{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.settings button{
+  margin-right: 10px !important;
+  position: relative;
+  cursor: pointer;
+}
+.settings button:last-child{
+  margin-right: 0px !important;
+}
+.upload_preview{
+  opacity: 0;
+  z-index: 2;
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  left: 0;
+}
+
+/* Vetores */
+.vetores{
+  padding-right: 25px !important;
+  margin-right: 25px !important;
+  width: 32%;
+  max-height: 530px;
+  overflow-y: scroll;
+}
+.vetor{
+  background: #f1f1f1;
+  border: 1px solid lightgray;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+.vetor input{
+  width: 100%;
+  margin-bottom: 10px;
+}
+.dimensions{
+  display: flex;
+  justify-content: space-between;
+}
+.dimensions input{
+  width: 48%;
+}
+
+/* Prévia de exibição */
+.previa{
+  width: 500px;
+  height: 468.58px;
+  border: 2px solid lightgray;
+  color: lightgray;
+  font-size: 50px;
+  position: relative;
+}
+.previa figcaption{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.preview_box_image{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 10;
+}
