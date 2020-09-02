@@ -36,7 +36,7 @@ function _exibit_main ( $exibit_methods ) {
   function exibit_html ( $the_post ) {
     wp_nonce_field( 'exibit_metabox_nonce', 'exibit_nonce' );
     ?>
-    <link rel="stylesheet" href="<?=plugins_url("assets/css/exibit-preview.css", __FILE__)?>">
+    <link rel="stylesheet" href="<?=plugins_url("assets/css/exibit.min.css", __FILE__)?>">
     <div class="exibit">
       <dialog id="window">
         <h3>Você realmente deseja resetar a edição dos vetores?</h3>
@@ -54,8 +54,7 @@ function _exibit_main ( $exibit_methods ) {
         <figcaption>624 x 585</figcaption>
       </div>
       <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-      <script type="text/javascript" src="<?=plugins_url("assets/js/exibit-preview.js", __FILE__)?>"></script>
-      <script type="text/javascript" src="<?=plugins_url("assets/js/exibit-vetor.js", __FILE__)?>"></script>
+      <script type="text/javascript" src="<?=plugins_url("assets/js/exibit.min.js", __FILE__)?>"></script>
     </div>
     <?php
   }
