@@ -8,6 +8,24 @@
   margin: 0;
 }
 
+/* Tela de warning */
+dialog {
+  display: none;
+  position: absolute;
+  background: #f1f2f3;
+  font-family: sans-serif;
+  width: auto;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #999;
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 10%;
+}
+
 /* Painel de controle */
 .settings{
   width: 100%;
@@ -20,6 +38,18 @@
   position: relative;
   cursor: pointer;
 }
+
+.settings button.exclude{
+  color: #a10000;
+  transition: all .3s;
+  border-color: #a10000;
+}
+
+.settings button.exclude:hover{
+  color: #fff;
+  background: #a10000;
+}
+
 .settings button:last-child{
   margin-right: 0px !important;
 }
@@ -45,16 +75,20 @@
   border: 1px solid lightgray;
   padding: 20px;
   margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-.vetor input{
+.vetor .exibit-input{
   width: 100%;
   margin-bottom: 10px;
+  height: 28px;
 }
 .dimensions{
   display: flex;
   justify-content: space-between;
 }
-.dimensions input{
+.vetor .exibit-input.half{
   width: 48%;
 }
 

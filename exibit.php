@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Exibit
- * Description: Crie um modelo de exibição Real Time para os seus produtos.
+ * Description: Um simples plugin para envio de campos personalizados.
  * Version: 1.0.0
  * Author: Petrus Nogueira
  *
@@ -38,34 +38,31 @@ function _exibit_main ( $exibit_methods ) {
     ?>
     <link rel="stylesheet" href="<?=plugins_url("assets/css/exibit-preview.css", __FILE__)?>">
     <div class="exibit">
+      <dialog id="window">
+        <h3>Você realmente deseja resetar a edição dos vetores?</h3>
+        <p>Caso Sim, todos os dados não salvos serão apagados permanentemente!</p>
+        <button id="exit">Não</button>
+        <button id="reset">Sim</button>
+      </dialog>
       <div class="settings">
-        <button type="button" class="button tagadd" name="button" disabled>Adicionar vetor</button>
+        <button id="exibit-vetor" type="button" class="button tagadd" name="button" disabled>Adicionar vetor</button>
         <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="30000" /><input id="exibit_preview" type="file" accept="image/*" class="upload_preview" name="exibit_preview" />Upload da imagem</button>
-        <button type="button" class="button tagadd exclude" name="button" disabled>Excluir imagem atual</button>
+        <button type="button" class="button tagadd exclude" name="button" disabled>Resetar</button>
       </div>
-      <ul class="vetores">
-        <!-- <li class="vetor">
-            <input type="text" placeholder="Nome" name="nome" value="" />
-            <input type="text" placeholder="Fonte" name="fonte" value="" />
-            <input type="text" placeholder="Tamanho" name="tamanho" value="" />
-            <div class="dimensions">
-              <input type="text" placeholder="X" name="dimensions_x" value="" />
-              <input type="text" placeholder="Y" name="dimensions_y" value="" />
-            </div>
-        </li> -->
-      </ul>
+      <ul class="vetores"></ul>
       <div id="preview_box" class="previa">
         <figcaption>624 x 585</figcaption>
       </div>
       <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
       <script type="text/javascript" src="<?=plugins_url("assets/js/exibit-preview.js", __FILE__)?>"></script>
+      <script type="text/javascript" src="<?=plugins_url("assets/js/exibit-vetor.js", __FILE__)?>"></script>
     </div>
     <?php
   }
 
-  add_action( 'save_post', 'vinil_meta_box_save' );
+  add_action( 'save_post', 'exibit_meta_box_save' );
 
-  function vinil_meta_box_save( $post_id )
+  function exibit_meta_box_save( $post_id )
   {
     if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 

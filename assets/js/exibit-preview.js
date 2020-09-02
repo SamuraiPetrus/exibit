@@ -16,5 +16,9 @@ $('#exibit_preview').change(function (event) {
   document.getElementById("preview_box").innerHTML = ''; // clear existing content
   $("#preview_box").append(imgElement);
 
-  //Acionando botão de Excluir imagem
+  //Habilitando reset de edição
+  $("#exibit-reset").prop("disabled", false);
+
+  //Habilitando adição de vetores
+  $("#exibit-vetor").prop("disabled", false);
 });
