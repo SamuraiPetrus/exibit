@@ -1,0 +1,10 @@
+/* Geral */
+
+.exibit{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0 !important;
+}
+.exibit ul, .exibit figure {
+  margin: 0;
+}

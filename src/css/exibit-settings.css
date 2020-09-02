@@ -1,0 +1,44 @@
+/* Painel de controle (Botões acima do editor) */
+
+.settings{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.settings button{
+  margin-right: 10px !important;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+
+.settings button.exclude,
+.settings button.exclude:focus{
+  color: #a10000;
+  transition: all .3s;
+  border-color: #a10000;
+}
+
+.settings button.exclude:focus{
+  box-shadow: 0 0 0 1px #a10000;
+}
+
+.settings button.exclude:hover{
+  color: #fff;
+  border-color: #a10000;
+  background: #a10000;
+}
+
+.settings button:last-child{
+  margin-right: 0px !important;
+}
+
+.upload_preview{
+  opacity: 0;
+  z-index: 2;
+  position: absolute;
+  cursor: pointer !important;
+  width: 100%;
+  left: 0;
+}

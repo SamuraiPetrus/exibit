@@ -1,0 +1,30 @@
+/* Vetores */
+
+.vetores{
+  padding-right: 25px !important;
+  margin-right: 25px !important;
+  width: 32%;
+  max-height: 530px;
+  overflow-y: scroll;
+}
+.vetor{
+  background: #f1f1f1;
+  border: 1px solid lightgray;
+  padding: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.vetor .exibit-input{
+  width: 100%;
+  margin-bottom: 10px;
+  height: 28px;
+}
+.dimensions{
+  display: flex;
+  justify-content: space-between;
+}
+.vetor .exibit-input.half{
+  width: 48%;
+}

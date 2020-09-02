@@ -23,11 +23,21 @@ module.exports = function(grunt) {
           'assets/css/exibit.min.css': ['src/css/*.css']
         }
       }
-    }
+    },
+    watch: {
+      scripts: {
+        files: ['src/js/*js', 'src/css/*css'],
+        tasks: ['default'],
+        options: {
+          spawn: false,
+        },
+      },
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
   grunt.registerTask('default', ['uglify', 'cssmin']);
