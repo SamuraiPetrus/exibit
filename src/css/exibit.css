@@ -4,7 +4,19 @@
   display: flex;
   flex-wrap: wrap;
   margin: 20px 0 !important;
+  position: relative;
 }
 .exibit ul, .exibit figure {
   margin: 0;
+}
+
+.exibit-mask{
+  display: none;
+  position: absolute;
+  z-index: 99;
+  left: 0;
+  height: 110%;
+  width: 100%;
+  background: #0000006b;
+  top: -10%;
 }

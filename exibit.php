@@ -37,19 +37,19 @@ function _exibit_main ( $exibit_methods ) {
     wp_nonce_field( 'exibit_metabox_nonce', 'exibit_nonce' );
     ?>
     <link rel="stylesheet" href="<?=plugins_url("assets/css/exibit.min.css", __FILE__)?>">
+    <div id="dialog-window">
+      <h3>Você realmente deseja resetar a edição dos vetores?</h3>
+      <button type="button" id="exibit-exit-option">Não</button>
+      <button type="button" id="exibit-reset-option">Sim</button>
+    </div>
+    <div class="exibit-mask"></div>
     <div class="exibit">
-      <dialog id="window">
-        <h3>Você realmente deseja resetar a edição dos vetores?</h3>
-        <p>Caso Sim, todos os dados não salvos serão apagados permanentemente!</p>
-        <button id="exit">Não</button>
-        <button id="reset">Sim</button>
-      </dialog>
       <div class="settings">
         <button id="exibit-vetor" type="button" class="button tagadd" name="button" disabled>Adicionar vetor</button>
-        <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="30000" /><input id="exibit_preview" type="file" accept="image/*" class="upload_preview" name="exibit_preview" />Upload da imagem</button>
+        <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="30000" /><input id="exibit_preview" type="file" accept="image/*" class="upload_preview" name="exibit_preview" required />Upload da imagem</button>
         <button id="exibit-reset" type="button" class="button tagadd exclude" name="button" disabled>Resetar</button>
       </div>
-      <ul class="vetores"></ul>
+      <ul id="exibit_vetores" class="vetores"></ul>
       <div id="preview_box" class="previa">
         <figcaption>624 x 585</figcaption>
       </div>

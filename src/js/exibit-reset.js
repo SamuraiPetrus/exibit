@@ -1,16 +1,22 @@
 function AcaoLimpar(){
-    document.getElementById("preview_box").innerHTML = '';
-    document.getElementById("preview_box").appendChild("<figcaption>624 x 585</figcaption>");
+    document.getElementById("exibit_preview").value = '';
+    document.getElementById("preview_box").innerHTML = '<figcaption>624 x 585</figcaption>';
+    document.getElementById("exibit_vetores").innerHTML = '';
 }
 
-var dialog = $('#window');
-$('#show').click(function() {
-  dialog.show();
+var dialog = $('#dialog-window'),
+mask = $(".exibit-mask");
+$('#exibit-reset').click(function() {
+  dialog.fadeIn();
+  mask.fadeIn();
 });
-$('#exit').click(function() {
-  dialog.hide();
+$('#exibit-exit-option').click(function() {
+  dialog.fadeOut();
+  mask.fadeOut();
 });
-$('#reset').click(function() {
+$('#exibit-reset-option').click(function() {
   AcaoLimpar();
-  dialog.hide();
+  dialog.fadeOut();
+  mask.fadeOut();
 });
+console.log("HEY");
