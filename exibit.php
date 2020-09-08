@@ -45,6 +45,11 @@ function _exibit_main ( $exibit_methods ) {
     <div class="exibit-mask"></div>
     <div class="exibit">
       <div class="settings">
+        <select id="exibit-display" name="exibit-display" disabled>
+          <option value="exibit-display-for-desktop">Desktop</option>
+          <option value="exibit-display-for-tablet">Tablet</option>
+          <option value="exibit-display-for-mobile">Mobile</option>
+        </select>
         <button id="exibit-vetor" type="button" class="button tagadd" name="button" disabled>Adicionar vetor</button>
         <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="30000" /><input id="exibit_preview" type="file" accept="image/*" class="upload_preview" name="exibit_preview" required />Upload da imagem</button>
         <button id="exibit-reset" type="button" class="button tagadd exclude" name="button" disabled>Resetar</button>

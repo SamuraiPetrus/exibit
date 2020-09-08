@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   margin: 20px 0 !important;
   position: relative;
+  justify-content: space-around;
 }
 .exibit ul, .exibit figure {
   margin: 0;

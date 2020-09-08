@@ -16,15 +16,43 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.vetor .exibit-input{
+
+.dimension{
+  position: relative;
+}
+.dimension span{
+  position: absolute;
+  left: 0;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  display: flex;
+  height: 100%;
+  width: 20px;
+  background: #c7c7c7;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #7e8993;
+}
+
+.vetor .exibit-input,
+.vetor .dimension{
   width: 100%;
   margin-bottom: 10px;
   height: 28px;
 }
-.dimensions{
-  display: flex;
-  justify-content: space-between;
+
+.vetor .dimension .exibit-input{
+  text-indent: 20px;
 }
-.vetor .exibit-input.half{
+.vetor .exibit-input.half,
+.vetor .dimension{
   width: 48%;
+}
+
+/* Aparência inicial */
+.vetor .dimension {
+  display: none;
+}
+.vetor .dimension.desktop {
+  display: block;
 }

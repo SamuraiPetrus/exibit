@@ -6,7 +6,8 @@
   justify-content: flex-end;
   margin-bottom: 20px;
 }
-.settings button{
+.settings button,
+.settings select{
   margin-right: 10px !important;
   position: relative;
   cursor: pointer;
