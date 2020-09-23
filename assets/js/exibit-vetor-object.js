@@ -14,3 +14,5 @@ vetor.xTablet = '<div class="dimension tablet"><span>X</span><input class="exibi
 vetor.yTablet = '<div class="dimension tablet"><span>Y</span><input class="exibit-input" type="number" name="exibit-vetor-dimensions_yTablet" value="0" /></div>';
 vetor.xDesktop = '<div class="dimension desktop"><span>X</span><input class="exibit-input" type="number" name="exibit-vetor-dimensions_xDesktop" value="0" /></div>';
 vetor.yDesktop = '<div class="dimension desktop"><span>Y</span><input class="exibit-input" type="number" name="exibit-vetor-dimensions_yDesktop" value="0" /></div>';
+
+export default vetor;
