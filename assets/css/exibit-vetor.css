@@ -56,3 +56,27 @@
 .vetor .dimension.desktop {
   display: block;
 }
+
+.vetor-previa{
+  z-index: 1000;
+  font-size: 35px;
+  color: black;
+  touch-action: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX( -50% );
+  width: fit-content !important;
+  /* Previnir highlight de texto na imagem */
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@-moz-document url-prefix() {
+  .vetor-previa{
+    width: -moz-fit-content !important;
+  }
+}

@@ -1,3 +1,6 @@
+
+//Script que controla o Warning de Reset do editor.
+
 var dialog = $('#dialog-window'),
 mask = $(".exibit-mask");
 

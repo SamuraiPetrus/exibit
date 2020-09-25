@@ -8,8 +8,8 @@ var exibit_preview = (function (event) {
 
     var imgElement = document.createElement("img");
     imgElement.classList.add("preview_box_image");
+    imgElement.setAttribute('draggable', false);
     imgElement.src = window.URL.createObjectURL(image);
-    imgElement.alt = image.name;
     imgElement.onload = function () {
         window.URL.revokeObjectURL(this.src);
     };

@@ -4,7 +4,7 @@
   Exibit View
 
   Camada de apresentação.
-  
+
 */
 
 add_action( "add_meta_boxes", "exibit_metabox_add" );
@@ -23,7 +23,7 @@ function exibit_metabox_add () {
 function exibit_html ( $the_post ) {
     wp_nonce_field( 'exibit_metabox_nonce', 'exibit_nonce' );
   ?>
-    <link rel="stylesheet" href="<?=plugins_url("assets/css/exibit.min.css", __FILE__)?>">
+    <link rel="stylesheet" href="<?=plugins_url("assets/css/index.css", __FILE__)?>">
     <div id="dialog-window">
         <h3>Você realmente deseja resetar a edição dos vetores?</h3>
         <button type="button" id="exibit-exit-option">Não</button>
@@ -46,6 +46,7 @@ function exibit_html ( $the_post ) {
             <figcaption>624 x 585</figcaption>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
         <script type="module" src="<?=plugins_url("assets/js/index.js", __FILE__)?>"></script>
     </div>
   <?php
