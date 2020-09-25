@@ -1,12 +1,18 @@
+/*
 
-//Objetos JavaScript do plugin
+  exibit-vetor-library.js - Biblioteca de componentes do vetor.
+
+  Cadastro de recursos do vetor: Componentes, Ações, etc..
+
+*/
+import FontesDoProjeto from '../fontes/exibit-fontes.js';
 
 var vetor = new Object();
 
-//Objeto que representa o painel de edição do vetor.
+//Componentes do painel de edição do vetor.
 vetor.painel = {
   'nome'    : '<input type="text" class="exibit-input" placeholder="Nome" name="exibit-vetor-nome" value="Vetor" />',
-  'fonte'   : get_font_families,
+  'fonte'   : FontesDoProjeto(),
   'cor'     : '<input type="color" class="exibit-input half" placeholder="Cor" name="exibit-vetor-cor" value="#000000" />',
   'tamanho' : {
       'mobile'  : '<input type="number" class="exibit-input half dimension mobile" placeholder="Tamanho" name="exibit-vetor-tamanho_mobile" value="20" />',
@@ -25,25 +31,21 @@ vetor.painel = {
   }
 };
 
-//Ação de adicionar a prévia de exibição do vetor.
+//Componente da prévia de exibição do vetor.
+//Para mais informações consulte: https://interactjs.io/docs/
 vetor.adicionar_previa = (function() {
-  interact('.vetor-previa').draggable({
-      // enable inertial throwing
-      inertia: true,
-      // keep the element within the area of it's parent
-      modifiers: [
-        interact.modifiers.restrictRect({
-          restriction: 'parent',
-          endOnly: true
-        })
-      ],
-      // enable autoScroll
-      autoScroll: true,
-
-      listeners: {
-        // call this function on every dragmove event
-        move: dragMove,
-      }
+    interact('.vetor-previa').draggable({
+        inertia: true,
+        modifiers: [
+            interact.modifiers.restrictRect({
+                restriction: 'parent',
+                endOnly: true
+            })
+        ],
+        autoScroll: true,
+        listeners: {
+            move: dragMove,
+        }
     });
 
     //Adicionando prévia de vetor
@@ -51,31 +53,23 @@ vetor.adicionar_previa = (function() {
     vetor_previa.text('Vetor');
     vetor_previa.addClass('vetor-previa');
     $("#preview_box").append(vetor_previa);
-});
 
-//Funções
+});
 
 //Algoritmo de movimento.
 function dragMove (event) {
-  var target = event.target
-  // keep the dragged position in the data-x/data-y attributes
-  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+  var target = event.target,
+  x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+  y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
   // translate the element
   target.style.webkitTransform =
     target.style.transform =
-      'translate(' + x + 'px, ' + y + 'px)'
+      'translate(' + x + 'px, ' + y + 'px)';
 
   // update the posiion attributes
-  target.setAttribute('data-x', x)
-  target.setAttribute('data-y', y)
+  target.setAttribute('data-x', x);
+  target.setAttribute('data-y', y);
 }
-
-//Algoritmo de busca de fontes
-function get_font_families () {
-  return  '<input type="text" class="exibit-input" placeholder="Fonte" name="exibit-vetor-fonte" />';
-}
-
 
 export default vetor;
