@@ -63,24 +63,39 @@ var exibit_vetor = (function () {
     vetor_previa.attr('data-x', 0);
     vetor_previa.attr('data-y', 0);
     vetor_previa.attr('vetor-id', vetor_id);
-    $("#preview_box").append(vetor_previa);
 
     //Algoritmo de movimento.
     function dragMove (event) {
-      var target = event.target,
-      x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-      y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        var target = event.target,
+        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
-      // translate the element
-      target.style.webkitTransform =
-        target.style.transform =
-          'translate(' + x + 'px, ' + y + 'px)';
+        // translate the element
+        target.style.webkitTransform =
+          target.style.transform =
+            'translate(' + x + 'px, ' + y + 'px)';
 
-      // update the posiion attributes
-      target.setAttribute('data-x', x);
-      target.setAttribute('data-y', y);
-    } 
+        // update the posiion attributes
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
+    }
 
+    //Atualizando prévia dos vetores em real time
+    Array.from(estrutura_do_painel.children).forEach(function( componente_do_painel ){
+        componente_do_painel.oninput = function () {
+
+            switch ( this.name ) {
+                case ( "exibit-vetor-nome" ) :
+                  vetor_previa.text(this.value);
+                  break;
+                case ( "exibit-vetor-cor" ) :
+                  vetor_previa.css("color", this.value);
+                  break;
+            }
+        }
+    });
+
+    $("#preview_box").append(vetor_previa);
     $(".vetores").append( estrutura_do_painel );
 
 });

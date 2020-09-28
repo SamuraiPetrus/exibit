@@ -13,11 +13,11 @@ var vetor = new Object();
 vetor.painel = {
   'nome'    : '<input type="text" class="exibit-input" placeholder="Nome" name="exibit-vetor-nome" value="Vetor" />',
   'fonte'   : FontesDoProjeto(),
-  'cor'     : '<input type="color" class="exibit-input half" placeholder="Cor" name="exibit-vetor-cor" value="#000000" />',
+  'cor'     : '<input type="color" class="exibit-input exibit-vetor-cor half" placeholder="Cor" name="exibit-vetor-cor" value="#000000" />',
   'tamanho' : {
-      'mobile'  : '<input type="number" class="exibit-input half dimension mobile" placeholder="Tamanho" name="exibit-vetor-tamanho_mobile" value="20" />',
-      'tablet'  : '<input type="number" class="exibit-input half dimension tablet" placeholder="Tamanho" name="exibit-vetor-tamanho_tablet" value="20" />',
-      'desktop'  : '<input type="number" class="exibit-input half dimension desktop" placeholder="Tamanho" name="exibit-vetor-tamanho_desktop" value="20" />',
+      'mobile'  : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension mobile" placeholder="Tamanho" name="exibit-vetor-tamanho_mobile" value="20" />',
+      'tablet'  : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension tablet" placeholder="Tamanho" name="exibit-vetor-tamanho_tablet" value="20" />',
+      'desktop'  : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension desktop" placeholder="Tamanho" name="exibit-vetor-tamanho_desktop" value="20" />',
   },
   'x'       : {
       'mobile'  : '<div class="dimension mobile"><span>X</span><input class="exibit-input" type="number" name="exibit-vetor-dimensions_xMobile" value="0" /></div>',
