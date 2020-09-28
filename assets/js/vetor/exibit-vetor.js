@@ -80,6 +80,18 @@ var exibit_vetor = (function () {
         target.setAttribute('data-y', y);
     }
 
+    //Criando botão de exclusão do vetor
+    var excluir_painel = document.createElement('a');
+    excluir_painel.classList.add('vetor-excluir');
+    excluir_painel.innerHTML = "Excluir";
+    excluir_painel.onclick = function () {
+        vetor_previa.empty();
+        estrutura_do_painel.remove();
+    }
+
+    //Salvando botão de excluir no painel
+    estrutura_do_painel.append(excluir_painel);
+
     //Atualizando prévia dos vetores em real time
     Array.from(estrutura_do_painel.children).forEach(function( componente_do_painel ){
         componente_do_painel.oninput = function () {

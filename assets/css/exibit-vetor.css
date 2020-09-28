@@ -57,6 +57,22 @@
   display: block;
 }
 
+.vetor-excluir {
+  color: #fff;
+  border: 2px solid #a10000;
+  background: #a10000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: .5s all;
+  width: 100%;
+  text-align: center;
+}
+
+.vetor-excluir:hover{
+  color: #a10000;
+  background: #fff;
+}
+
 .vetor-previa{
   z-index: 1000;
   font-size: 35px;
