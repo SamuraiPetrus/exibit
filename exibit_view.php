@@ -37,12 +37,12 @@ function exibit_html ( $the_post ) {
                 <option value="exibit-display-for-tablet">Tablet</option>
                 <option value="exibit-display-for-mobile">Mobile</option>
             </select>
-            <button id="exibit-vetor" type="button" class="button tagadd" name="button" disabled>Adicionar vetor</button>
+            <button id="exibit-vetor" type="button" class="button tagadd" name="button">Adicionar vetor</button>
             <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="30000" /><input id="exibit_preview" type="file" accept="image/*" class="upload_preview" name="exibit_preview" required />Upload da imagem</button>
             <button id="exibit-reset" type="button" class="button tagadd exclude" name="button" disabled>Resetar</button>
         </div>
         <ul id="exibit_vetores" class="vetores"></ul>
-        <div id="preview_box" class="previa">
+        <div id="preview_box" class="previa desktop">
             <figcaption>624 x 585</figcaption>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

@@ -31,45 +31,4 @@ vetor.painel = {
   }
 };
 
-//Componente da prévia de exibição do vetor.
-//Para mais informações consulte: https://interactjs.io/docs/
-vetor.adicionar_previa = (function() {
-    interact('.vetor-previa').draggable({
-        inertia: true,
-        modifiers: [
-            interact.modifiers.restrictRect({
-                restriction: 'parent',
-                endOnly: true
-            })
-        ],
-        autoScroll: true,
-        listeners: {
-            move: dragMove,
-        }
-    });
-
-    //Adicionando prévia de vetor
-    var vetor_previa = $("<div>");
-    vetor_previa.text('Vetor');
-    vetor_previa.addClass('vetor-previa');
-    $("#preview_box").append(vetor_previa);
-
-});
-
-//Algoritmo de movimento.
-function dragMove (event) {
-  var target = event.target,
-  x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-  y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-  // translate the element
-  target.style.webkitTransform =
-    target.style.transform =
-      'translate(' + x + 'px, ' + y + 'px)';
-
-  // update the posiion attributes
-  target.setAttribute('data-x', x);
-  target.setAttribute('data-y', y);
-}
-
 export default vetor;

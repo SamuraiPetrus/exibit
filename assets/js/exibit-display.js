@@ -4,6 +4,8 @@
 function exibit_resize_preview_box_action ( width, height, displayName ) {
     //Atualizando dimensões da preview preview_box
     $("#preview_box").css("width", width + "px").css("height", height + "px");
+    $("#preview_box").attr("class", "");
+    $("#preview_box").attr("class", "previa " + displayName);
     //Atualizando inputs disponíveis
     $(".dimension." + displayName).css("display", "block");
 }

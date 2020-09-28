@@ -63,9 +63,9 @@
   color: black;
   touch-action: none;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX( -50% );
+  top: 40%;
+  left: 40%;
+  transform: translate( 0px, 0px );
   width: fit-content !important;
   /* Previnir highlight de texto na imagem */
   -khtml-user-select: none;
