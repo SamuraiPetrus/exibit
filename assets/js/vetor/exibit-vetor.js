@@ -95,13 +95,19 @@ var exibit_vetor = (function () {
     //Atualizando prévia dos vetores em real time
     Array.from(estrutura_do_painel.children).forEach(function( componente_do_painel ){
         componente_do_painel.oninput = function () {
-
             switch ( this.name ) {
                 case ( "exibit-vetor-nome" ) :
                   vetor_previa.text(this.value);
                   break;
                 case ( "exibit-vetor-cor" ) :
                   vetor_previa.css("color", this.value);
+                  break;
+                case ( "exibit-vetor-tamanho" ) :
+                  vetor_previa.css("font-size", this.value + "px");
+                  break;
+                case ( undefined ) :
+                  //Campo está sob uma div "dimension"
+                  console.log( this.children );
                   break;
             }
         }

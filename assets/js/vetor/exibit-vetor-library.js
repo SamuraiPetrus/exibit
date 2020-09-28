@@ -15,9 +15,9 @@ vetor.painel = {
   'fonte'   : FontesDoProjeto(),
   'cor'     : '<input type="color" class="exibit-input exibit-vetor-cor half" placeholder="Cor" name="exibit-vetor-cor" value="#000000" />',
   'tamanho' : {
-      'mobile'  : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension mobile" placeholder="Tamanho" name="exibit-vetor-tamanho_mobile" value="20" />',
-      'tablet'  : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension tablet" placeholder="Tamanho" name="exibit-vetor-tamanho_tablet" value="20" />',
-      'desktop'  : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension desktop" placeholder="Tamanho" name="exibit-vetor-tamanho_desktop" value="20" />',
+      'mobile'  : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension mobile" placeholder="Tamanho" name="exibit-vetor-tamanho" value="35" min="0" />',
+      'tablet'  : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension tablet" placeholder="Tamanho" name="exibit-vetor-tamanho" value="35" min="0" />',
+      'desktop' : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension desktop" placeholder="Tamanho" name="exibit-vetor-tamanho" value="35" min="0" />',
   },
   'x'       : {
       'mobile'  : '<div class="dimension mobile"><span>X</span><input class="exibit-input" type="number" name="exibit-vetor-dimensions_xMobile" value="0" /></div>',
