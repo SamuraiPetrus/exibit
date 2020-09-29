@@ -96,18 +96,33 @@ var exibit_vetor = (function () {
         componente_do_painel.oninput = function () {
             switch ( this.name ) {
                 case ( "exibit-vetor-nome" ) :
-                  vetor_previa.text(this.value);
-                  break;
+                    vetor_previa.text(this.value);
+                    break;
                 case ( "exibit-vetor-cor" ) :
-                  vetor_previa.css("color", this.value);
-                  break;
+                    vetor_previa.css("color", this.value);
+                    break;
                 case ( "exibit-vetor-tamanho" ) :
-                  vetor_previa.css("font-size", this.value + "px");
-                  break;
+                    vetor_previa.css("font-size", this.value + "px");
+                    break;
                 case ( undefined ) :
-                  //Campo está sob uma div "dimension"
-                  console.log( this.children );
-                  break;
+                    //Coordenadas
+                    var coordinate = this.children[1],
+                    data_x = vetor_previa.attr('data-x');
+                    var data_y = vetor_previa.attr('data-y');
+
+                    if ( coordinate.classList.contains( "exibit-input-x" ) ) {
+                        //Mover vetor x
+                        vetor_previa.attr('data-x', coordinate.value);
+                        var translate = 'translate(' + coordinate.value + 'px, ' + data_y + 'px)';
+
+                    } else if ( coordinate.classList.contains( "exibit-input-y" ) ) {
+                        //Mover vetor y
+                        vetor_previa.attr('data-y', coordinate.value);
+                        var translate = 'translate(' + data_x + 'px, ' + coordinate.value + 'px)';
+                    }
+
+                    vetor_previa.css( 'transform', translate );
+                    break;
             }
         }
     });
