@@ -31,7 +31,7 @@ var exibit_display = (function(){
             preview_box_dimensions.set("displayName", "mobile");
             break;
     }
-    //Atualização dos tamanhos mediante display.
+    //Atualização dos dados mediante display.
     $("#preview_box .vetor-previa").each(function(){
         //Loop das prévias de vetores
         var previa = $(this),
@@ -44,7 +44,12 @@ var exibit_display = (function(){
             if ( previa_vetor_id === estrutura_vetor_id ) {
                 $(this).children().each(function(){
                   //Loop de componentes do painel
-                  console.log($(this));
+                  if ( $(this).hasClass('exibit-vetor-tamanho') ) {
+                      if ( $(this).hasClass( preview_box_dimensions.get("displayName") ) ) {
+                          //Alterando tamanho mediante display
+                          previa.css('font-size', $(this).val() + "px");
+                      }
+                  }
                 });
             }
 

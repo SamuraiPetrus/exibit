@@ -39,7 +39,6 @@ var exibit_vetor = (function () {
 
     //Habilitando a funcionalidade de mudança das prévias (Desktop, Tablet e Mobile)
     $("#exibit-display").prop("disabled", false);
-    $("#exibit-display").val("exibit-display-for-desktop");
 
     //Adicionando o vetor a prévia de imagem
     interact('.vetor-previa').draggable({
