@@ -1,3 +1,4 @@
+import VetorBind from './vetor/exibit-vetor-bind.js';
 
 //Script que modifica o padrão da tela
 
@@ -6,6 +7,7 @@ function exibit_resize_preview_box_action ( width, height, displayName ) {
     $("#preview_box").css("width", width + "px").css("height", height + "px");
     $("#preview_box").attr("class", "");
     $("#preview_box").attr("class", "previa " + displayName);
+    $("#preview_box").attr("display", displayName);
     //Atualizando inputs disponíveis
     $(".dimension." + displayName).css("display", "block");
 }
@@ -32,27 +34,26 @@ var exibit_display = (function(){
             break;
     }
     //Atualização dos dados mediante display.
-    $("#preview_box .vetor-previa").each(function(){
-        //Loop das prévias de vetores
-        var previa = $(this),
-        previa_vetor_id = previa.attr('vetor-id');
-
-        $("#exibit_vetores .vetor").each(function(){
-            //Loop dos painéis de vetores
-            var estrutura_vetor_id = $(this).attr("vetor-id");
-
-            if ( previa_vetor_id === estrutura_vetor_id ) {
-                $(this).children().each(function(){
-                  //Loop de componentes do painel
-                  if ( $(this).hasClass('exibit-vetor-tamanho') ) {
-                      if ( $(this).hasClass( preview_box_dimensions.get("displayName") ) ) {
-                          //Alterando tamanho mediante display
-                          previa.css('font-size', $(this).val() + "px");
-                      }
+    VetorBind(function ( scope ) {
+        scope['painel'].children().each(function(){
+          //Loop de componentes do painel
+          if ( $(this).hasClass( preview_box_dimensions.get("displayName") ) ) {
+              if ( $(this).hasClass('exibit-vetor-tamanho') ) {
+                  //Alterando tamanho mediante display
+                  scope['previa'].css('font-size', $(this).val() + "px");
+              } else if ( $(this).attr("name") === undefined ) {
+                  //Alterando coordenadas
+                  var coordinate = $(this).children()[1];
+                  if ( $(coordinate).hasClass( 'exibit-input-x' ) ) {
+                      scope['previa'].attr( 'data-x', $(coordinate).val() );
+                      var translate = 'translate(' + $(coordinate).val() + 'px,' + scope['previa'].attr('data-y') + 'px)';
+                  } else if ( $(coordinate).hasClass( 'exibit-input-y' ) ) {
+                      scope['previa'].attr( 'data-y', $(coordinate).val() );
+                      var translate = 'translate(' + scope['previa'].attr('data-x') + 'px,' + $(coordinate).val() + 'px)';
                   }
-                });
-            }
-
+                  scope['previa'].css('transform', translate);
+              }
+          }
         });
     });
     exibit_resize_preview_box_action(

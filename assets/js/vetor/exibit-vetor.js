@@ -1,7 +1,9 @@
 
 //Algoritmo de criação do vetor
 import Vetor from './exibit-vetor-library.js';
+import VetorBind from './exibit-vetor-bind.js';
 import GerarID from './exibit-gerar-id.js';
+
 /*
 
   exibit-vetor.js - Responsável por adicionar um novo vetor na interface.
@@ -77,11 +79,31 @@ var exibit_vetor = (function () {
         // update the posiion attributes
         target.setAttribute('data-x', x);
         target.setAttribute('data-y', y);
+
+        //Atualizando coordenadas no painel
+        VetorBind(function( scope ){
+            console.log( scope['painel'] );
+            scope['painel'].children().each(function(){
+              //Loop de componentes do painel
+              if ( $(this).attr("name") === undefined ) {
+                  if ( $(this).hasClass( $("#preview_box").attr('display') ) ) {
+                      var coordinate = $(this).children()[1];
+
+                      if ( $( coordinate ).hasClass( 'exibit-input-x' ) ) {
+                        $( coordinate ).val( x );
+                      } else if ( $( coordinate ).hasClass( 'exibit-input-y' ) ) {
+                        $( coordinate ).val( y );
+                      }
+                  }
+              }
+            });
+        });
     }
 
     //Criando botão de exclusão do vetor
     var excluir_painel = document.createElement('a');
     excluir_painel.classList.add('vetor-excluir');
+    excluir_painel.name = 'vetor-excluir';
     excluir_painel.innerHTML = "Excluir";
     excluir_painel.onclick = function () {
         vetor_previa.empty();

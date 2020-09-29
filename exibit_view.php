@@ -42,7 +42,7 @@ function exibit_html ( $the_post ) {
             <button id="exibit-reset" type="button" class="button tagadd exclude" name="button" disabled>Resetar</button>
         </div>
         <ul id="exibit_vetores" class="vetores"></ul>
-        <div id="preview_box" class="previa desktop">
+        <div id="preview_box" class="previa desktop" display="desktop">
             <figcaption>624 x 585</figcaption>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
