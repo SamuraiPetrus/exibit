@@ -82,17 +82,18 @@ var exibit_vetor = (function () {
 
         //Atualizando coordenadas no painel
         VetorBind(function( scope ){
-            console.log( scope['painel'] );
             scope['painel'].children().each(function(){
               //Loop de componentes do painel
               if ( $(this).attr("name") === undefined ) {
                   if ( $(this).hasClass( $("#preview_box").attr('display') ) ) {
                       var coordinate = $(this).children()[1];
 
-                      if ( $( coordinate ).hasClass( 'exibit-input-x' ) ) {
-                        $( coordinate ).val( x );
-                      } else if ( $( coordinate ).hasClass( 'exibit-input-y' ) ) {
-                        $( coordinate ).val( y );
+                      if ( scope['painel'].attr('vetor-id') === target.getAttribute('vetor-id') ) {
+                          if ( $( coordinate ).hasClass( 'exibit-input-x' ) ) {
+                            $( coordinate ).val( x );
+                          } else if ( $( coordinate ).hasClass( 'exibit-input-y' ) ) {
+                            $( coordinate ).val( y );
+                          }
                       }
                   }
               }
