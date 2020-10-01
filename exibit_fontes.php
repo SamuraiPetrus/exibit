@@ -65,13 +65,15 @@ function exibit_fontes_upload_callback ( $the_post ) {
 
     $fonte = get_post_meta( $the_post->ID, 'exibit_fonte_upload_meta', true );
 
-    ?>
+    // Exibir informações da fonte carregada.
+    if ( $fonte ) {
+        $fonte_info = pathinfo( $_SERVER['DOCUMENT_ROOT'] . parse_url( $fonte )['path'] );
+        echo "<h2><strong>Fonte atual:</strong> " . $fonte_info['filename'] . '.' . $fonte_info['extension'] . "</h2><a target='_blank' class='button' href='" . $fonte . "'>Baixar fonte atual</a>";
+    }
+?>
     <p>Formatos suportados: <strong>.ttf</strong> <strong>.otf</strong></p>
-    <?php if ( $fonte ) { ?>
-        <h2>Fonte atual: <?= var_dump( $fontes ); ?></h2>
-    <?php } ?>
-    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+    <p>Tamanho máximo do arquivo: <strong>500KB</strong></p>
+    <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
     <input type="file" accept=".ttf, .otf" class="upload_preview" name="exibit_fonte_upload_meta" required />
-
-    <?php
+<?php
 }
