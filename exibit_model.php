@@ -65,7 +65,7 @@ function exibit_fontes_model ( $post_id ) {
             wp_die( 'Tamanho do arquivo excede o máximo de <strong>100KB</strong>. <br> <a href="javascript:history.back()"><-Voltar</a>' );
         }
 
-        if ( !$allowFile ) { wp_die( $fonte['type'] . ' não é uma extensão suportada!' ); }
+        if ( !$allowFile ) { wp_die( $fonte['type'] . ' não é uma extensão suportada! <br> <a href="javascript:history.back()"><-Voltar</a>' ); }
 
         if ( ! is_dir( $target_dir ) ) {
             mkdir( $target_dir );
@@ -76,11 +76,11 @@ function exibit_fontes_model ( $post_id ) {
         }
 
         if ( move_uploaded_file($fonte['tmp_name'], $target_file) ) {
-          
+
             update_post_meta( $post_id, 'exibit_fonte_upload_meta', wp_kses( $target_url, $allowed) );
 
         } else {
-            wp_die( print_r( $fonte ) );
+            wp_die( 'Algo de errado aconteceu. <br> <a target="_blank" href="https://github.com/SamuraiPetrus/exibit/issues/new">Reportar</a> <a href="javascript:history.back()"><-Voltar</a>' );
         }
     }
 }

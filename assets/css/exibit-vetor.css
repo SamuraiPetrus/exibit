@@ -97,3 +97,8 @@
     width: -moz-fit-content !important;
   }
 }
+
+/* Painel do vetor */
+.exibit-vetor-fontes option[disabled=true]{
+    color: gray;
+}

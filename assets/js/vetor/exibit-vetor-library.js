@@ -5,14 +5,13 @@
   Cadastro de recursos do vetor: Componentes, Ações, etc..
 
 */
-import FontesDoProjeto from '../fontes/exibit-fontes.js';
 
 var vetor = new Object();
 
 //Componentes do painel de edição do vetor.
 vetor.painel = {
   'nome'    : '<input type="text" class="exibit-input" placeholder="Nome" name="exibit-vetor-nome" value="Vetor" />',
-  'fonte'   : FontesDoProjeto(),
+  'fonte'   : '<select class="exibit-input exibit-vetor-fontes"><option value="" disabled selected>Carregando fontes...</option></select>',
   'cor'     : '<input type="color" class="exibit-input exibit-vetor-cor half" placeholder="Cor" name="exibit-vetor-cor" value="#000000" />',
   'tamanho' : {
       'mobile'  : '<input type="number" class="exibit-input exibit-vetor-tamanho half dimension mobile" placeholder="Tamanho" name="exibit-vetor-tamanho" value="35" min="0" />',

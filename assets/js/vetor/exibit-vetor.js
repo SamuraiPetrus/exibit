@@ -1,5 +1,6 @@
 
 //Algoritmo de criação do vetor
+import FontesDoProjeto from '../fontes/exibit-fontes.js';
 import Vetor from './exibit-vetor-library.js';
 import VetorBind from './exibit-vetor-bind.js';
 import GerarID from './exibit-gerar-id.js';
@@ -25,6 +26,7 @@ var exibit_vetor = (function () {
     var estrutura_do_painel = document.createElement("li");
     estrutura_do_painel.classList.add("vetor");
     estrutura_do_painel.setAttribute('vetor-id', vetor_id);
+    estrutura_do_painel.setAttribute('id', vetor_id);
 
     //Cadastrando os componentes do painel. (Inputs de nome, cor, tamanho...)
     Object.keys( Vetor.painel ).forEach( function ( componente ) {
@@ -38,6 +40,8 @@ var exibit_vetor = (function () {
             $( estrutura_do_painel ).append( componente_do_painel );
         }
     });
+
+    FontesDoProjeto( vetor_id );
 
     //Habilitando a funcionalidade de mudança das prévias (Desktop, Tablet e Mobile)
     $("#exibit-display").prop("disabled", false);
