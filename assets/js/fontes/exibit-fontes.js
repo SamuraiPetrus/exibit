@@ -4,6 +4,8 @@
 
 */
 
+import FontFamilyChanger from "./exibit-fontfamily-changer.js";
+
 var fontes_do_projeto = (function ( vetor_id ) {
     var httpRequest,
     url = "../wp-json/wp/v2/exibit_fontes";
@@ -26,16 +28,26 @@ var fontes_do_projeto = (function ( vetor_id ) {
                         //Laço de repetição mediante as fontes cadastradas no site
                         fontes_object.forEach(function( fonte ){
                             var id = fonte.id,
+                            url = fonte.exibit_fonte_upload_meta[0],
                             title = fonte.title.rendered;
 
                             if ( id && title ) {
                                 var option = document.createElement("option");
                                 option.value = id;
+                                option.setAttribute( 'url', url );
+                                option.setAttribute( 'registered', "false" );
                                 option.innerHTML = title;
 
                                 child.append( option );
                             }
                         });
+
+                        FontFamilyChanger( child, vetor_id );
+
+                        //Troca dinâmica de font-family.
+                        child.onchange = function () {
+                            FontFamilyChanger( child, vetor_id );
+                        }
                     }
                 });
             }

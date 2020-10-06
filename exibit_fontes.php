@@ -77,3 +77,66 @@ function exibit_fontes_upload_callback ( $the_post ) {
     <input type="file" accept=".ttf, .otf" class="upload_preview" name="exibit_fonte_upload_meta" required />
 <?php
 }
+
+add_action( 'rest_api_init', function () {
+    register_rest_field(
+        'exibit_fontes',
+        'exibit_fonte_upload_meta', array(
+            'get_callback' => 'get_post_meta_cb',
+            'update_callback' => 'update_post_meta_cb',
+            'schema' => null
+        )
+    );
+});
+
+function get_post_meta_cb( $object, $field_name, $request ) {
+    return get_post_meta( $object[ 'id' ], $field_name );
+}
+
+function update_post_meta_cb( $value, $object, $field_name ) {
+    return update_post_meta( $object[ 'id' ], $field_name, $value );
+}
+
+// //Incluindo fontes nas heads do site.
+// $heads = [
+//   'wp_head', //Head do cliente
+//   'admin_head' // Head do admin
+// ];
+//
+// foreach ( $heads as $head ) {
+//     if ( $head == 'admin_head' ) {
+//         //Fontes no painel de admnistração
+//         add_action( $head, function() {
+//           if ( isset($_GET['post']) && isset($_GET['action']) ) {
+//               //Página de edição de post
+//               print_font_faces();
+//           }
+//         });
+//     } else if ( $head == 'wp_head' ) {
+//         //Fontes no cliente
+//     }
+// }
+//
+// function print_font_faces () {
+//     $args = [
+//       "post_type" => "exibit_fontes",
+//       "posts_per_page" => -1
+//     ];
+//
+//     $fontes = get_posts($args);
+//
+//     foreach ( $fontes as $fonte ) {
+//         $url = get_post_meta( $fonte->ID, 'exibit_fonte_upload_meta', true );
+//         echo '
+//             <style type="text/css" media="screen, print">
+//
+//                 @font-face {
+//                     font-family: '.$fonte->post_title.';
+//                     src: url("'.$url.'");
+//                     font-weight: normal;
+//                 }
+//
+//             </style>
+//         ';
+//     }
+// }
