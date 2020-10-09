@@ -45,7 +45,7 @@ function exibit_html ( $the_post ) {
         <div id="preview_box" class="previa desktop" display="desktop">
             <figcaption>624 x 585</figcaption>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
         <script type="module" src="<?=plugins_url("assets/js/index.js", __FILE__)?>"></script>
     </div>
