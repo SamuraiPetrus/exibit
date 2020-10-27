@@ -21,9 +21,31 @@ function exibit_vetores_model ( $post_id ) {
         )
     );
 
-    //Vetores
-    if( isset( $_POST['exibit_preview'] ) ) {
-        update_post_meta( $post_id, 'texto_meta_box', wp_kses( $_POST['exibit_preview'], $allowed ) );
+    $exibit_vetor_fields = [
+        'vetor_ids'         => 'exibit_vetor_id',
+        'nomes'             => 'exibit_vetor_nome',
+        'fontes'            => 'exibit_vetor_fontes',
+        'cores'             => 'exibit_vetor_cor',
+        'tamanhos_mobile'   => 'exibit_vetor_tamanho_mobile',
+        'tamanhos_tablet'   => 'exibit_vetor_tamanho_tablet',
+        'tamanhos_desktop'  => 'exibit_vetor_tamanho_desktop',
+        'x_mobile'          => 'exibit_vetor_x_mobile',
+        'x_tablet'          => 'exibit_vetor_x_tablet',
+        'x_desktop'         => 'exibit_vetor_x_desktop',
+        'y_mobile'          => 'exibit_vetor_y_mobile',
+        'y_tablet'          => 'exibit_vetor_y_tablet',
+        'y_desktop'         => 'exibit_vetor_y_desktop',
+    ];
+
+    $exibit_fields = [];
+    foreach ( $exibit_vetor_fields as $key => $value ) {
+        if ( isset($_POST[$value]) ) {
+            $exibit_fields[$key] = $_POST[$value];
+        }
+    }
+
+    if ( count($exibit_fields) > 0 ) {
+        update_post_meta( $post_id, 'exibit_fields', $exibit_fields );
     }
 }
 add_action( 'save_post', 'exibit_vetores_model' );

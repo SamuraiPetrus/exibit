@@ -7,6 +7,8 @@
 
 */
 
+include_once 'exibit_templates.php';
+
 add_action( "add_meta_boxes", "exibit_metabox_add" );
 
 function exibit_metabox_add () {
@@ -22,6 +24,8 @@ function exibit_metabox_add () {
 
 function exibit_html ( $the_post ) {
     wp_nonce_field( 'exibit_metabox_nonce', 'exibit_nonce' );
+    $exibit_fields = get_post_meta($the_post->ID, 'exibit_fields', true );
+    // $exibit_preview = get_post_meta($the_post->ID, 'exibit_preview', true);
   ?>
     <link rel="stylesheet" href="<?=plugins_url("assets/css/index.css", __FILE__)?>">
     <div id="dialog-window">
@@ -38,12 +42,46 @@ function exibit_html ( $the_post ) {
                 <option value="exibit-display-for-mobile">Mobile</option>
             </select>
             <button id="exibit-vetor" type="button" class="button tagadd" name="button" disabled>Adicionar vetor</button>
-            <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="30000" /><input id="exibit_preview" type="file" accept="image/*" class="upload_preview" name="exibit_preview" required />Upload da imagem</button>
+            <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="30000" /><input id="exibit_preview" type="file" accept="image/*" class="upload_preview" name="exibit_vetor_preview[]" required />Upload da imagem</button>
             <button id="exibit-reset" type="button" class="button tagadd exclude" name="button" disabled>Resetar</button>
         </div>
-        <ul id="exibit_vetores" class="vetores"></ul>
+        <ul id="exibit_vetores" class="vetores">
+          <?php
+              if ( is_array( $exibit_fields ) ) {
+                  if ( count( $exibit_fields['vetor_ids'] ) > 0 ) {
+                      for ( $i = 0; $i < count( $exibit_fields['vetor_ids'] ); $i++ ) {
+                          Vetor_Template( $exibit_fields, $i );
+                      }
+                  }
+              }
+          ?>
+        </ul>
         <div id="preview_box" class="previa desktop" display="desktop">
-            <figcaption>624 x 585</figcaption>
+            <?php
+                if ( is_array( $exibit_fields ) ) {
+                    if ( count( $exibit_fields['vetor_ids'] ) > 0 ) {
+                        for ( $i = 0; $i < count( $exibit_fields ); $i++ ) { ?>
+
+                            <div class="vetor-previa"
+                                data-x="<?= $exibit_fields['x_desktop'][$i] ?>"
+                                data-y="<?= $exibit_fields['y_desktop'][$i] ?>"
+                                vetor-id="<?= $exibit_fields['vetor_ids'][$i] ?>"
+                                style="
+                                  font-family: Bree Serif;
+                                  transform: translate( <?= $exibit_fields['x_desktop'][$i] ?>px, <?= $exibit_fields['y_desktop'][$i] ?>px );
+                                ">
+                                <!-- Nome -->
+                                <?= $exibit_fields['nomes'][$i] ?>
+                            </div>
+
+                        <?php }
+                    } else {
+                        echo '<figcaption>624 x 585</figcaption>';
+                    }
+                } else {
+                    echo '<figcaption>624 x 585</figcaption>';
+                }
+            ?>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>

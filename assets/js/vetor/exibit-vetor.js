@@ -41,6 +41,14 @@ var exibit_vetor = (function () {
         }
     });
 
+    //Cadastrando vetor_ids
+    var vetor_id_input = document.createElement('input');
+    vetor_id_input.setAttribute('type', 'hidden');
+    vetor_id_input.name = "exibit_vetor_id[]";
+    vetor_id_input.value = vetor_id;
+    $( estrutura_do_painel ).append( vetor_id_input );
+
+    //Carregando as fontes do projeto
     FontesDoProjeto( vetor_id );
 
     //Habilitando a funcionalidade de mudança das prévias (Desktop, Tablet e Mobile)
@@ -122,13 +130,15 @@ var exibit_vetor = (function () {
     Array.from(estrutura_do_painel.children).forEach(function( componente_do_painel ){
         componente_do_painel.oninput = function () {
             switch ( this.name ) {
-                case ( "exibit-vetor-nome" ) :
+                case "exibit_vetor_nome[]" :
                     vetor_previa.text(this.value);
                     break;
-                case ( "exibit-vetor-cor" ) :
+                case "exibit_vetor_cor[]" :
                     vetor_previa.css("color", this.value);
                     break;
-                case ( "exibit-vetor-tamanho" ) :
+                case "exibit_vetor_tamanho_mobile[]" :
+                case "exibit_vetor_tamanho_ipad[]" :
+                case "exibit_vetor_tamanho_desktop[]" :
                     vetor_previa.css("font-size", this.value + "px");
                     break;
                 case ( undefined ) :
