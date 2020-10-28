@@ -1,5 +1,6 @@
 <?php
 
+// HTML de vetores já cadastrados.
 function Vetor_Template ( $exibit_fields, $i ) { ?>
 
     <li class="vetor" vetor-id="<?= $exibit_fields['vetor_ids'][$i] ?>" id="<?= $exibit_fields['vetor_ids'][$i] ?>">
@@ -38,5 +39,59 @@ function Vetor_Template ( $exibit_fields, $i ) { ?>
         <input type="hidden" name="exibit_vetor_id[]" value="<?=$exibit_fields['vetor_ids'][$i]?>">
         <a class="vetor-excluir" name="vetor-excluir">Excluir</a>
     </li>
+
+<?php }
+
+// Ações de vetores já cadastrados.
+function Vetor_Script ( $exibit_fields, $i ) { ?>
+
+    <script type="text/javascript">
+
+        //Excluir vetor
+        $('#<?= $exibit_fields['vetor_ids'][$i] ?> .vetor-excluir').click(function() {
+            $('#<?= $exibit_fields['vetor_ids'][$i] ?>').remove();
+            $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').remove();
+        });
+
+        //Manipular tabela do vetor em Real Time.
+        $('#<?= $exibit_fields['vetor_ids'][$i] ?>').children().each(function() {
+            $(this).on('input', function () {
+                switch ( $(this).attr('name') ) {
+                    case "exibit_vetor_nome[]" :
+                        $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').text( $(this).val() );
+                        break;
+                    case "exibit_vetor_cor[]" :
+                        $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').css( 'color', $(this).val() );
+                        break;
+                    case "exibit_vetor_tamanho_mobile[]" :
+                    case "exibit_vetor_tamanho_ipad[]" :
+                    case "exibit_vetor_tamanho_desktop[]" :
+                        $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').css("font-size", $(this).val() + "px");
+                        break;
+                    case ( undefined ) :
+                        //Coordenadas
+                        var coordinate = $(this).children()[1];
+                        // console.log( coordinate );
+                        data_x = $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').attr('data-x');
+                        var data_y = $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').attr('data-y');
+
+                        if ( $(coordinate).hasClass( "exibit-input-x" ) ) {
+                            //Mover vetor x
+                            $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').attr( 'data-x', $(coordinate).val() );
+                            var translate = 'translate(' + $(coordinate).val() + 'px, ' + data_y + 'px)';
+
+                        } else if ( $(coordinate).hasClass( "exibit-input-y" ) ) {
+                            //Mover vetor y
+                            $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').attr( 'data-y', $(coordinate).val() );
+                            var translate = 'translate(' + data_x + 'px, ' + $(coordinate).val() + 'px)';
+                        }
+
+                        $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').css( 'transform', translate );
+                        break;
+                }
+            })
+        });
+
+    </script>
 
 <?php }

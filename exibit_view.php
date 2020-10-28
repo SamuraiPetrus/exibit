@@ -28,6 +28,7 @@ function exibit_html ( $the_post ) {
     // $exibit_preview = get_post_meta($the_post->ID, 'exibit_preview', true);
   ?>
     <link rel="stylesheet" href="<?=plugins_url("assets/css/index.css", __FILE__)?>">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <div id="dialog-window">
         <h3>Você realmente deseja resetar a edição dos vetores?</h3>
         <button type="button" id="exibit-exit-option">Não</button>
@@ -51,6 +52,7 @@ function exibit_html ( $the_post ) {
                   if ( count( $exibit_fields['vetor_ids'] ) > 0 ) {
                       for ( $i = 0; $i < count( $exibit_fields['vetor_ids'] ); $i++ ) {
                           Vetor_Template( $exibit_fields, $i );
+                          Vetor_Script( $exibit_fields, $i );
                       }
                   }
               }
@@ -62,13 +64,15 @@ function exibit_html ( $the_post ) {
                     if ( count( $exibit_fields['vetor_ids'] ) > 0 ) {
                         for ( $i = 0; $i < count( $exibit_fields ); $i++ ) { ?>
 
-                            <div class="vetor-previa"
+                            <div id="vetor-<?= $exibit_fields['vetor_ids'][$i] ?>" class="vetor-previa"
                                 data-x="<?= $exibit_fields['x_desktop'][$i] ?>"
                                 data-y="<?= $exibit_fields['y_desktop'][$i] ?>"
                                 vetor-id="<?= $exibit_fields['vetor_ids'][$i] ?>"
                                 style="
-                                  font-family: Bree Serif;
+                                  font-family: 'Bree Serif';
                                   transform: translate( <?= $exibit_fields['x_desktop'][$i] ?>px, <?= $exibit_fields['y_desktop'][$i] ?>px );
+                                  color: <?= $exibit_fields['cores'][$i] ?>;
+                                  font-size: <?= $exibit_fields['vetor_ids'][$i] ?>;
                                 ">
                                 <!-- Nome -->
                                 <?= $exibit_fields['nomes'][$i] ?>
@@ -83,7 +87,6 @@ function exibit_html ( $the_post ) {
                 }
             ?>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
         <script type="module" src="<?=plugins_url("assets/js/index.js", __FILE__)?>"></script>
     </div>

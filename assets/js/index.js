@@ -8,10 +8,3 @@ $('#exibit_preview').change(ExibitPreview);
 $("#exibit-vetor").click(ExibitVetor);
 $("#exibit-display").change(ExibitDisplay);
 $('#exibit-reset').click(ExibitReset);
-
-//Exclusão de Vetores já cadastrados
-$('.vetor-excluir').each(function () {
-    $(this).click(function(){
-        $(this).parent().empty();
-    });
-});
