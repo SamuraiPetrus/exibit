@@ -64,7 +64,7 @@ function Vetor_Script ( $exibit_fields, $i ) { ?>
                         $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').css( 'color', $(this).val() );
                         break;
                     case "exibit_vetor_tamanho_mobile[]" :
-                    case "exibit_vetor_tamanho_ipad[]" :
+                    case "exibit_vetor_tamanho_tablet[]" :
                     case "exibit_vetor_tamanho_desktop[]" :
                         $('#vetor-<?= $exibit_fields['vetor_ids'][$i] ?>').css("font-size", $(this).val() + "px");
                         break;
@@ -91,6 +91,8 @@ function Vetor_Script ( $exibit_fields, $i ) { ?>
                 }
             })
         });
+
+        //Manipular vetor (Drag and Drop)
 
     </script>
 

@@ -50,6 +50,9 @@ function exibit_html ( $the_post ) {
           <?php
               if ( is_array( $exibit_fields ) ) {
                   if ( count( $exibit_fields['vetor_ids'] ) > 0 ) {
+
+                      echo '<script type="text/javascript">$("#exibit-display").prop("disabled", false);</script>';
+
                       for ( $i = 0; $i < count( $exibit_fields['vetor_ids'] ); $i++ ) {
                           Vetor_Template( $exibit_fields, $i );
                           Vetor_Script( $exibit_fields, $i );
