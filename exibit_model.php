@@ -47,6 +47,48 @@ function exibit_vetores_model ( $post_id ) {
     if ( count($exibit_fields) > 0 ) {
         update_post_meta( $post_id, 'exibit_fields', $exibit_fields );
     }
+
+    //Upload da imagem de fundo.
+    $preview           = $_FILES['exibit_vetor_preview'];
+
+    $previews_path     = "wp-content/uploads/previews";
+    $target_dir      = get_home_path() . $previews_path;
+    $target_file     = $target_dir     . '/' . basename( $preview['name'] );
+    $target_url      = get_home_url()  . '/' . $previews_path . '/' . basename( $preview['name'] );
+    $allowFile       = 0;
+    $supported_types = [
+        'image/png',
+        'image/jpeg'
+    ];
+
+    //Checando se o arquivo atende os requisitos.
+    if ( $preview['size'] <= 500000 ) { // Tamanho do arquivo está dentro dos limites de tamanho?
+        foreach ( $supported_types as $type ) {
+            if ( $preview['type'] === $type ) { //O formato do arquivo é suportado?
+                $allowFile++;
+            }
+        }
+    } else {
+        wp_die( 'Tamanho do arquivo excede o máximo de <strong>100KB</strong>. <br> <a href="javascript:history.back()"><-Voltar</a>' );
+    }
+
+    if ( !$allowFile ) { wp_die( $preview['type'] . ' não é uma extensão suportada! <br> <a href="javascript:history.back()"><-Voltar</a>' ); }
+
+    if ( ! is_dir( $target_dir ) ) {
+        mkdir( $target_dir );
+    } else {
+        if ( file_exists( $target_file ) ) {
+            wp_die( 'Esse arquivo já existe no site! <br> <a href="javascript:history.back()"><-Voltar</a>' );
+        }
+    }
+
+    if ( move_uploaded_file($preview['tmp_name'], $target_file) ) {
+
+        update_post_meta( $post_id, 'exibit_preview', wp_kses( $target_url, $allowed) );
+
+    } else {
+        wp_die( 'Algo de errado aconteceu. <br> <a target="_blank" href="https://github.com/SamuraiPetrus/exibit/issues/new">Reportar</a> <a href="javascript:history.back()"><-Voltar</a>' );
+    }
 }
 add_action( 'save_post', 'exibit_vetores_model' );
 

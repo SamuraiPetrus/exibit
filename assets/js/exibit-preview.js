@@ -14,7 +14,11 @@ var exibit_preview = (function (event) {
         window.URL.revokeObjectURL(this.src);
     };
 
-    document.getElementById("preview_box").innerHTML = ''; // clear existing content
+    Array.from(document.getElementById("preview_box").children).forEach(function ( child ) {
+        if ( child.tagName == 'IMG' ) {
+            child.parentNode.removeChild( child );
+        }
+    }); // clear previous image
 
     $("#preview_box").append(imgElement);
 

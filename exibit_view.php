@@ -25,7 +25,7 @@ function exibit_metabox_add () {
 function exibit_html ( $the_post ) {
     wp_nonce_field( 'exibit_metabox_nonce', 'exibit_nonce' );
     $exibit_fields = get_post_meta($the_post->ID, 'exibit_fields', true );
-    // $exibit_preview = get_post_meta($the_post->ID, 'exibit_preview', true);
+    $exibit_preview = get_post_meta($the_post->ID, 'exibit_preview', true);
     Exibit_Fontes( $exibit_fields['fontes'] );
   ?>
     <link rel="stylesheet" href="<?=plugins_url("assets/css/index.css", __FILE__)?>">
@@ -44,7 +44,7 @@ function exibit_html ( $the_post ) {
                 <option value="exibit-display-for-mobile">Mobile</option>
             </select>
             <button id="exibit-vetor" type="button" class="button tagadd" name="button" disabled>Adicionar vetor</button>
-            <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="30000" /><input id="exibit_preview" type="file" accept="image/*" class="upload_preview" name="exibit_vetor_preview[]" required />Upload da imagem</button>
+            <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="30000" /><input id="exibit_preview" type="file" accept="image/*" class="upload_preview" name="exibit_vetor_preview" required />Upload da imagem</button>
             <button id="exibit-reset" type="button" class="button tagadd exclude" name="button" disabled>Resetar</button>
         </div>
         <ul id="exibit_vetores" class="vetores">
@@ -83,11 +83,10 @@ function exibit_html ( $the_post ) {
                             </div>
 
                         <?php }
-                    } else {
-                        echo '<figcaption>624 x 585</figcaption>';
                     }
-                } else {
-                    echo '<figcaption>624 x 585</figcaption>';
+                }
+                if ( $exibit_preview ) {
+                    echo '<img class="preview_box_image" draggable="false" src="'. $exibit_preview .'">';
                 }
             ?>
         </div>
