@@ -26,6 +26,7 @@ function exibit_html ( $the_post ) {
     wp_nonce_field( 'exibit_metabox_nonce', 'exibit_nonce' );
     $exibit_fields = get_post_meta($the_post->ID, 'exibit_fields', true );
     // $exibit_preview = get_post_meta($the_post->ID, 'exibit_preview', true);
+    Exibit_Fontes( $exibit_fields['fontes'] );
   ?>
     <link rel="stylesheet" href="<?=plugins_url("assets/css/index.css", __FILE__)?>">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -72,7 +73,7 @@ function exibit_html ( $the_post ) {
                                 data-y="<?= $exibit_fields['y_desktop'][$i] ?>"
                                 vetor-id="<?= $exibit_fields['vetor_ids'][$i] ?>"
                                 style="
-                                  font-family: 'Bree Serif';
+                                  font-family: <?= get_the_title( $exibit_fields['fontes'][$i] ) ?>;
                                   transform: translate( <?= $exibit_fields['x_desktop'][$i] ?>px, <?= $exibit_fields['y_desktop'][$i] ?>px );
                                   color: <?= $exibit_fields['cores'][$i] ?>;
                                   font-size: <?= $exibit_fields['vetor_ids'][$i] ?>;
