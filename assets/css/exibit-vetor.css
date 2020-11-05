@@ -3,14 +3,14 @@
 .vetores{
   padding-right: 25px !important;
   margin-right: 25px !important;
-  width: 32%;
+  width: 20%;
   max-height: 530px;
   overflow-y: scroll;
 }
 .vetor{
   background: #f1f1f1;
   border: 1px solid lightgray;
-  padding: 20px;
+  padding: 15px;
   margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -43,10 +43,6 @@
 
 .vetor .dimension .exibit-input{
   text-indent: 20px;
-}
-.vetor .exibit-input.half,
-.vetor .dimension{
-  width: 48%;
 }
 
 /* Aparência inicial */

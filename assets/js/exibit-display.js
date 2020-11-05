@@ -18,8 +18,8 @@ var exibit_display = (function(){
 
     switch ( this.value ) {
         case "exibit-display-for-desktop":
-            preview_box_dimensions.set("width", 504);
-            preview_box_dimensions.set("height", 472.58);
+            preview_box_dimensions.set("width", 600);
+            preview_box_dimensions.set("height", 568);
             preview_box_dimensions.set("displayName", "desktop");
             break;
         case "exibit-display-for-tablet":
