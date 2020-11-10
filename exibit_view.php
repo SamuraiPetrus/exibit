@@ -8,6 +8,7 @@
 
 */
 
+//Prévia
 add_action('woocommerce_before_single_product_summary', function () {
     $the_post = get_queried_object();
     $exibit_fields = get_post_meta($the_post->ID, 'exibit_fields', true );
@@ -111,5 +112,38 @@ add_action('woocommerce_before_single_product_summary', function () {
 
     </figure>
 
+
+<?php } });
+
+//Inputs do JavaScript
+add_action('exibit_vetores_hook', function () {
+  $the_post = get_queried_object();
+  $exibit_fields = get_post_meta($the_post->ID, 'exibit_fields', true );
+  ?>
+  <style media="screen">
+      .exibit-vetor-label {
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          margin-bottom: 18px;
+      }
+      .exibit-vetor-input {
+          border: none;
+          background: #f5f5f5;
+          text-indent: 8px;
+          font-weight: lighter;
+          margin-bottom: 30px;
+      }
+  </style>
+  <?php
+  for ( $i =0; count( $exibit_fields['vetor_ids'] ) > $i; $i++ ) { ?>
+
+      <label class="exibit-vetor-label"><?=$exibit_fields['nomes'][$i]?></label>
+      <input type="text" class="exibit-vetor-input" id="<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>" value="">
+
+      <script type="text/javascript">
+          document.getElementById('<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>').oninput = function () {
+              document.getElementById('<?= "vetor-" . $exibit_fields['vetor_ids'][$i] ?>').innerHTML = this.value;
+          }
+      </script>
 
 <?php } });
