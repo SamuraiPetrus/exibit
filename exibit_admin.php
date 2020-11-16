@@ -8,6 +8,7 @@
 */
 
 include_once 'exibit_templates.php';
+include_once 'exibit_filters.php';
 
 add_action( "add_meta_boxes", "exibit_metabox_add" );
 
@@ -26,7 +27,12 @@ function exibit_html ( $the_post ) {
     wp_nonce_field( 'exibit_metabox_nonce', 'exibit_nonce' );
     $exibit_fields = get_post_meta($the_post->ID, 'exibit_fields', true );
     $exibit_preview = get_post_meta($the_post->ID, 'exibit_preview', true);
-    Exibit_Fontes( $exibit_fields['fontes'] );
+
+    if ( is_array( $exibit_fields ) ) {
+        if ( array_key_exists( 'fontes', $exibit_fields ) ) {
+            Exibit_Fontes( $exibit_fields['fontes'] );
+        }
+    }
   ?>
     <link rel="stylesheet" href="<?=plugins_url("assets/css/index.css", __FILE__)?>">
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -49,9 +55,8 @@ function exibit_html ( $the_post ) {
         </div>
         <ul id="exibit_vetores" class="vetores">
           <?php
-              if ( is_array( $exibit_fields['vetor_ids'] ) ) {
-                  if ( count( $exibit_fields['vetor_ids'] ) > 0 ) {
-
+              if ( is_array( $exibit_fields ) ) {
+                  if ( array_key_exists( 'vetor_ids', $exibit_fields ) ) {
                       echo '<script type="text/javascript">$("#exibit-display").prop("disabled", false);</script>';
 
                       for ( $i = 0; $i < count( $exibit_fields['vetor_ids'] ); $i++ ) {
