@@ -168,13 +168,11 @@ function Exibit_Fontes ( $fontes ) {
 function Style_User_Interface () { ?>
   <style media="screen">
 
-      .woocommerce-product-gallery {
-          display: none !important;
+      .exibit-view {
+          position: relative;
       }
 
-      .exibit-view {
-          height: 406px;
-          width: 322.5px;
+      .woocommerce-product-gallery{
           position: relative;
       }
 
@@ -184,107 +182,251 @@ function Style_User_Interface () { ?>
           object-fit: contain;
       }
 
+      .exibit-vetores{
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+      }
+
+      .exibit-vetor-input-field{
+        margin-bottom: 30px;
+        width: 100%;
+      }
+
+      @media screen and ( min-width: 768px ) {
+          .exibit-vetor-input-field{
+            width: 45%;
+          }
+      }
+
       .exibit-vetor-label {
           text-transform: uppercase;
           letter-spacing: 1px;
           margin-bottom: 18px;
+          display: block;
       }
       .exibit-vetor-input {
           border: none;
           background: #f5f5f5;
           text-indent: 8px;
           font-weight: lighter;
-          margin-bottom: 30px;
+          width: 100%;
+      }
+      .exibit-preview-img{
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
       }
 
+      #exibir-previa {
+          color: #C2A672;
+          fill: #C2A672;
+          display: none;
+          letter-spacing: 2px;
+          margin-bottom: 30px;
+          font-weight: bolder;
+          font-size: 15px;
+          cursor: pointer;
+          text-decoration: underline;
+          text-transform: uppercase;
+          width: -moz-fit-content;
+          width: fit-content;
+      }
+
+      .personalize {
+          font-size: 15px;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: #D4D4D4;
+          position: relative;
+      }
+
+      .personalize::after{
+          height: 1px;
+          width: 57%;
+          background: #D4D4D4;
+          content: "";
+          display: block;
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+      }
+
+      .preview{
+          height: 100%;
+          width: 100%;
+          background: rgba(1,1,1,0.5);
+          position: absolute;
+          z-index: 1;
+          display: none;
+      }
+
+      /* Size preservation em caso de imagens sem galeria ao lado. */
+      .size-preservation{
+          width:600px;
+          height: 406px;
+          left: 50%;
+          position: relative;
+          transform: translateX(-50%);
+      }
       @media screen and ( min-width: 768px ) {
-          .exibit-view {
-              height: 459.47px;
-              width: 474px;
-              position: relative;
+          .size-preservation{
+              width: 621px;
+              height: 600px;
           }
       }
-
       @media screen and ( min-width: 960px ) {
-          .exibit-view {
-              height: 568px;
-              width: 600px;
-              position: relative;
+          .size-preservation{
+              width: 703px;
+              height: 669px;
           }
       }
   </style>
 <?php }
 
 function Preview_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
-    <figure class="exibit-view">
+      <?php if ( (bool) $exibit_preview ) : ?>
+          <img class="exibit-preview-img" src="<?=$exibit_preview?>">\
+      <?php endif;
 
-        <?php if ( (bool) $exibit_preview ) : ?>
-            <img src="<?=$exibit_preview?>">
-        <?php endif;
-
-            if ( is_array( $exibit_fields ) ) {
-                if ( array_key_exists( 'vetor_ids', $exibit_fields ) ) {
-                    for ( $i = 0; $i < count( $exibit_fields ); $i++ ) {
-                        $fonte = get_post($exibit_fields['fontes'][$i]);
-                        $url = get_post_meta( $fonte->ID, 'exibit_fonte_upload_meta', true );
-                        ?>
-                            <style type="text/css" media="screen, print">
-
-                                 @font-face {
-                                     font-family: '<?= $fonte->post_title ?>';
-                                     src: url('<?= $url ?>');
-                                     font-weight: normal;
-                                 }
-
-                                 <?= "#vetor-" . $exibit_fields['vetor_ids'][$i] ?> {
-                                     position: absolute;
-                                     font-family: <?= get_the_title( $exibit_fields['fontes'][$i] ) ?>;
-                                     top: 40%;
-                                     left: 40%;
-                                     color: <?= $exibit_fields['cores'][$i] ?>;
-                                     transform: translate( <?= $exibit_fields['x_mobile'][$i] ?>px, <?= $exibit_fields['y_mobile'][$i] ?>px );
-                                     font-size: <?= $exibit_fields['tamanhos_mobile'][$i] ?>px;
-                                 }
-
-                                 @media screen and ( min-width: 768px ) {
-                                     <?= "#vetor-" . $exibit_fields['vetor_ids'][$i] ?> {
-                                         transform: translate( <?= $exibit_fields['x_tablet'][$i] ?>px, <?= $exibit_fields['y_tablet'][$i] ?>px );
-                                         font-size: <?= $exibit_fields['tamanhos_tablet'][$i] ?>px;
-                                     }
-                                 }
-
-                                 @media screen and ( min-width: 960px ) {
-                                     <?= "#vetor-" . $exibit_fields['vetor_ids'][$i] ?> {
-                                         transform: translate( <?= $exibit_fields['x_desktop'][$i] ?>px, <?= $exibit_fields['y_desktop'][$i] ?>px );
-                                         font-size: <?= $exibit_fields['tamanhos_desktop'][$i] ?>px;
-                                     }
-                                 }
-
-                            </style>
-
-                            <div id="vetor-<?= $exibit_fields['vetor_ids'][$i] ?>" class="vetor-previa"
-                                data-x="<?= $exibit_fields['x_desktop'][$i] ?>"
-                                data-y="<?= $exibit_fields['y_desktop'][$i] ?>"
-                                vetor-id="<?= $exibit_fields['vetor_ids'][$i] ?>">
-
-                                <?= $exibit_fields['nomes'][$i] ?>
-
-                            </div>
-                        <?php
-                    }
-                }
-            }
-        ?>
-    </figure>
+          if ( is_array( $exibit_fields ) ) {
+              if ( array_key_exists( 'vetor_ids', $exibit_fields ) ) {
+                  for ( $i = 0; $i < count( $exibit_fields ); $i++ ) {
+                      $fonte = get_post($exibit_fields['fontes'][$i]);
+                      $url = get_post_meta( $fonte->ID, 'exibit_fonte_upload_meta', true );
+                      ?>
+                          <style type="text/css" media="screen, print">\
+                               @font-face {\
+                                   font-family: "<?= $fonte->post_title ?>";\
+                                   src: url("<?= $url ?>");\
+                                   font-weight: normal;\
+                               }\
+                               <?= "#vetor-" . $exibit_fields['vetor_ids'][$i] ?> {\
+                                   position: absolute;\
+                                   font-family: "<?= get_the_title( $exibit_fields['fontes'][$i] ) ?>";\
+                                   top: 40%;\
+                                   left: 40%;\
+                                   color: <?= $exibit_fields['cores'][$i] ?>;\
+                                   transform: translate( <?= $exibit_fields['x_mobile'][$i] ?>px, <?= $exibit_fields['y_mobile'][$i] ?>px );\
+                                   font-size: <?= $exibit_fields['tamanhos_mobile'][$i] ?>px;\
+                               }\
+                               @media screen and ( min-width: 768px ) {\
+                                   <?= "#vetor-" . $exibit_fields['vetor_ids'][$i] ?> {\
+                                       transform: translate( <?= $exibit_fields['x_tablet'][$i] ?>px, <?= $exibit_fields['y_tablet'][$i] ?>px );\
+                                       font-size: <?= $exibit_fields['tamanhos_tablet'][$i] ?>px;\
+                                   }\
+                               }\
+                               @media screen and ( min-width: 960px ) {\
+                                   <?= "#vetor-" . $exibit_fields['vetor_ids'][$i] ?> {\
+                                       transform: translate( <?= $exibit_fields['x_desktop'][$i] ?>px, <?= $exibit_fields['y_desktop'][$i] ?>px );\
+                                       font-size: <?= $exibit_fields['tamanhos_desktop'][$i] ?>px;\
+                                   }\
+                               }\
+                          </style>\
+                          <div id="vetor-<?= $exibit_fields['vetor_ids'][$i] ?>" class="vetor-previa"\
+                              data-x="<?= $exibit_fields['x_desktop'][$i] ?>"\
+                              data-y="<?= $exibit_fields['y_desktop'][$i] ?>"\
+                              vetor-id="<?= $exibit_fields['vetor_ids'][$i] ?>">\
+                              <?= $exibit_fields['nomes'][$i] ?>\
+                          </div>\
+                      <?php
+                  }
+              }
+          }
+      ?>
 <?php }
 
 function Inputs_User_Interface ( $exibit_fields, $i ) { ?>
-    <label class="exibit-vetor-label"><?=$exibit_fields['nomes'][$i]?></label>
-    <input type="text" class="exibit-vetor-input" id="<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>" value="">
+    <div class="exibit-vetor-input-field">
+        <label class="exibit-vetor-label"><?=$exibit_fields['nomes'][$i]?></label>
+        <input type="text" class="exibit-vetor-input" id="<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>" value="">
+    </div>
 
     <script type="text/javascript">
         document.getElementById('<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>').oninput = function () {
             document.getElementById('<?= "vetor-" . $exibit_fields['vetor_ids'][$i] ?>').innerHTML = this.value;
         }
+    </script>
+<?php }
+
+function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
+
+    <p class="personalize u-marginBottom--inter">Personalize</p>
+    <a href="javascript:void(0)" id="exibir-previa" class="off">Visualizar prévia <i class="fas fa-eye"></i></a>
+    <script type="text/javascript">
+
+        function exibir_previa ( thisObj ) {
+            document.querySelector(".preview").style.display = "flex";
+            document.getElementById('exibir-previa').innerHTML = 'Esconder prévia <i class="fas fa-eye-slash"></i>';
+            thisObj.classList.remove( 'off' );
+            thisObj.classList.add( 'on' );
+        }
+
+        function esconder_previa ( thisObj ) {
+            document.querySelector(".preview").style.display = "none";
+            document.getElementById('exibir-previa').innerHTML = 'Visualizar prévia <i class="fas fa-eye"></i>';
+            thisObj.classList.remove( 'on' );
+            thisObj.classList.add( 'off' );
+        }
+
+        //Configuração da estrutura da prévia.
+        setTimeout(function(){
+
+            //Removendo status de loading do botão de prévia
+            console.log('Ativado');
+            document.getElementById('exibir-previa').style.display = "block";
+
+            //Definindo a prévia
+            var gallery = document.querySelector('.woocommerce-product-gallery'),
+            atributos = {
+              lupa: false,
+              galeria: false
+            };
+
+            Array.from( gallery.children ).forEach(function( child ){
+
+                console.log( child );
+                if ( child.classList.contains('flex-viewport') ) {
+                    //Trata-se de uma imagem com lupa.
+                    atributos.lupa = true;
+                }
+
+                if ( child.classList.contains('flex-control-nav') ) {
+                    atributos.galeria = true;
+                }
+
+            });
+
+            //Criando a estrutura da prévia
+            var preview = document.createElement('figure');
+            preview.classList.add('preview');
+
+            if ( atributos.galeria ) {
+                preview.innerHTML = '<?php Preview_User_Interface( $exibit_preview, $exibit_fields ) ?>';
+            } else {
+                preview.innerHTML = '<div class="size-preservation"><?php Preview_User_Interface( $exibit_preview, $exibit_fields ) ?></div>';
+            }
+
+            if ( atributos.lupa ) {
+                var append_preview = gallery.querySelectorAll('.flex-viewport')[0];
+            } else {
+                var append_preview = gallery;
+            }
+            append_preview.append( preview );
+
+            document.getElementById('exibir-previa').onclick = function () {
+                if ( this.classList.contains('off') ) {
+                    exibir_previa( this );
+                } else {
+                    esconder_previa( this );
+                }
+            }
+
+            // document.querySelector('.flex-control-nav').onclick = function () {
+            //     esconder_previa( this )
+            // };
+        }, 5000)
+
     </script>
 <?php }

@@ -18,17 +18,17 @@ var exibit_display = (function(){
 
     switch ( this.value ) {
         case "exibit-display-for-desktop":
-            preview_box_dimensions.set("width", 600);
-            preview_box_dimensions.set("height", 568);
+            preview_box_dimensions.set("width", 703);
+            preview_box_dimensions.set("height", 669);
             preview_box_dimensions.set("displayName", "desktop");
             break;
         case "exibit-display-for-tablet":
-            preview_box_dimensions.set("width", 474);
-            preview_box_dimensions.set("height", 459.47);
+            preview_box_dimensions.set("width", 621);
+            preview_box_dimensions.set("height", 600);
             preview_box_dimensions.set("displayName", "tablet");
             break;
         case "exibit-display-for-mobile":
-            preview_box_dimensions.set("width", 322.5);
+            preview_box_dimensions.set("width", 600);
             preview_box_dimensions.set("height", 406);
             preview_box_dimensions.set("displayName", "mobile");
             break;

@@ -18,6 +18,11 @@ if ( is_plugin_active('woocommerce/woocommerce.php') ) {
         echo ' enctype="multipart/form-data"';
     }
 
+    //Adicionando Font Awesome ao plugin
+    add_action('wp_head', function () { ?>
+        <script src="https://kit.fontawesome.com/15d4e6a380.js" crossorigin="anonymous"></script>
+    <?php });
+
     //Arquitetura
     include_once "exibit_fontes.php";
     include_once "exibit_admin.php";

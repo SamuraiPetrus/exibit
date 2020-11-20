@@ -50,7 +50,6 @@ function exibit_vetores_model ( $post_id ) {
 
     //Upload da imagem de fundo.
     $preview           = $_FILES['exibit_vetor_preview'];
-
     $previews_path     = "wp-content/uploads/previews";
     $target_dir      = get_home_path() . $previews_path;
     $target_file     = $target_dir     . '/' . basename( $preview['name'] );
