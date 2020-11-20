@@ -168,11 +168,9 @@ function Exibit_Fontes ( $fontes ) {
 function Style_User_Interface () { ?>
   <style media="screen">
 
-      .exibit-view {
-          position: relative;
-      }
-
-      .woocommerce-product-gallery{
+      .exibit-view,
+      .flex-viewport,
+      .woocommerce-product-gallery {
           position: relative;
       }
 
@@ -264,22 +262,25 @@ function Style_User_Interface () { ?>
 
       /* Size preservation em caso de imagens sem galeria ao lado. */
       .size-preservation{
-          width:600px;
-          height: 406px;
+          max-width:600px;
+          max-height: 406px;
+          width: 100%;
+          height: 100%;
+          top: 50%;
           left: 50%;
           position: relative;
-          transform: translateX(-50%);
+          transform: translate(-50%, -50%);
       }
       @media screen and ( min-width: 768px ) {
           .size-preservation{
-              width: 621px;
-              height: 600px;
+              max-width: 621px;
+              max-height: 600px;
           }
       }
       @media screen and ( min-width: 960px ) {
           .size-preservation{
-              width: 703px;
-              height: 669px;
+              max-width: 649.217px;
+              height: 599.8px;
           }
       }
   </style>
@@ -402,11 +403,7 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
             var preview = document.createElement('figure');
             preview.classList.add('preview');
 
-            if ( atributos.galeria ) {
-                preview.innerHTML = '<?php Preview_User_Interface( $exibit_preview, $exibit_fields ) ?>';
-            } else {
-                preview.innerHTML = '<div class="size-preservation"><?php Preview_User_Interface( $exibit_preview, $exibit_fields ) ?></div>';
-            }
+            preview.innerHTML = '<div class="size-preservation"><?php Preview_User_Interface( $exibit_preview, $exibit_fields ) ?></div>';
 
             if ( atributos.lupa ) {
                 var append_preview = gallery.querySelectorAll('.flex-viewport')[0];

@@ -1,8 +1,6 @@
 /* Vetores */
 
 .vetores{
-  padding-right: 25px !important;
-  margin-right: 25px !important;
   width: 20%;
   max-height: 530px;
   overflow-y: scroll;
