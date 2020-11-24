@@ -359,23 +359,26 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
 
         function exibir_previa ( thisObj ) {
             document.querySelector(".preview").style.display = "flex";
-            document.getElementById('exibir-previa').innerHTML = 'Esconder prévia <i class="fas fa-eye-slash"></i>';
+            thisObj.innerHTML = 'Esconder prévia <i class="fas fa-eye-slash"></i>';
             thisObj.classList.remove( 'off' );
-            thisObj.classList.add( 'on' );
+            if ( ! thisObj.classList.contains('on') ) {
+               thisObj.classList.add( 'on' );
+            }
         }
 
         function esconder_previa ( thisObj ) {
             document.querySelector(".preview").style.display = "none";
-            document.getElementById('exibir-previa').innerHTML = 'Visualizar prévia <i class="fas fa-eye"></i>';
+            thisObj.innerHTML = 'Visualizar prévia <i class="fas fa-eye"></i>';
             thisObj.classList.remove( 'on' );
-            thisObj.classList.add( 'off' );
+            if ( ! thisObj.classList.contains('off') ) {
+               thisObj.classList.add( 'off' );
+            }
         }
 
         //Configuração da estrutura da prévia.
         setTimeout(function(){
 
             //Removendo status de loading do botão de prévia
-            console.log('Ativado');
             document.getElementById('exibir-previa').style.display = "block";
 
             //Definindo a prévia
@@ -387,7 +390,6 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
 
             Array.from( gallery.children ).forEach(function( child ){
 
-                console.log( child );
                 if ( child.classList.contains('flex-viewport') ) {
                     //Trata-se de uma imagem com lupa.
                     atributos.lupa = true;
@@ -420,9 +422,9 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
                 }
             }
 
-            // document.querySelector('.flex-control-nav').onclick = function () {
-            //     esconder_previa( this )
-            // };
+            document.querySelector('.flex-control-nav').onclick = function () {
+                esconder_previa( document.getElementById('exibir-previa') )
+            };
         }, 5000)
 
     </script>
