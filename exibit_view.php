@@ -25,8 +25,8 @@ function exibit_preview_callback () {
 
 add_action('woocommerce_before_single_product_summary', 'exibit_preview_callback');
 
-//Inputs do JavaScript
-function exibit_inputs_callback () {
+add_action('woocommerce_before_add_to_cart_button', function () {
+    //Inputs do JavaScript
     $the_post = get_queried_object();
     $exibit_fields = get_post_meta($the_post->ID, 'exibit_fields', true );
     $exibit_preview = get_post_meta($the_post->ID, 'exibit_preview', true);
@@ -41,6 +41,4 @@ function exibit_inputs_callback () {
             ?> </div> <?php
         }
     }
-}
-
-add_action('exibit_vetores_hook', 'exibit_inputs_callback');
+});

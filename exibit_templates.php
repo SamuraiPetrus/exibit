@@ -341,7 +341,7 @@ function Preview_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
 function Inputs_User_Interface ( $exibit_fields, $i ) { ?>
     <div class="exibit-vetor-input-field">
         <label class="exibit-vetor-label"><?=$exibit_fields['nomes'][$i]?></label>
-        <input type="text" class="exibit-vetor-input" id="<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>" value="">
+        <input type="text" class="exibit-vetor-input" id="<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>" name="<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>" value="">
     </div>
 
     <script type="text/javascript">
@@ -375,6 +375,34 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
             }
         }
 
+        //Função de salvamento do canvas.
+        function takePhotoThenSubmit () {
+            exibir_previa( document.getElementById('exibir-previa') );
+            html2canvas(document.querySelector("#preview"),{
+                /* Parâmetros responsáveis por corrigir o bug da imagem,
+                 que estava capturando o scroll do site. */
+                scrollX: 0,
+                scrollY: -window.scrollY
+            }).then(
+                canvas => {
+                    var form  = document.getElementById("single_product_form"),
+                        input = document.createElement("input");
+
+                    //CREATING INPUT
+                    input.type = "hidden";
+                    input.id   = "data-base64";
+                    input.name = "canvas";
+
+                    // imagem do produto criptografada em base64 e enviada via input hidden
+                    input.value = canvas.toDataURL("image/png");
+                    form.appendChild(input);
+
+                    document.querySelector('#single_product_submit').click();
+
+                }
+            );
+        }
+
         //Configuração da estrutura da prévia.
         setTimeout(function(){
 
@@ -404,7 +432,7 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
             //Criando a estrutura da prévia
             var preview = document.createElement('figure');
             preview.classList.add('preview');
-
+            preview.id = "preview";
             preview.innerHTML = '<div class="size-preservation"><?php Preview_User_Interface( $exibit_preview, $exibit_fields ) ?></div>';
 
             if ( atributos.lupa ) {
@@ -425,6 +453,7 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
             document.querySelector('.flex-control-nav').onclick = function () {
                 esconder_previa( document.getElementById('exibir-previa') )
             };
+
         }, 5000)
 
     </script>

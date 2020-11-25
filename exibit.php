@@ -28,6 +28,7 @@ if ( is_plugin_active('woocommerce/woocommerce.php') ) {
     include_once "exibit_admin.php";
     include_once "exibit_model.php";
     include_once "exibit_view.php";
+    include_once "exibit_order_meta_fields.php";
 
 } else {
     wp_die('O plugin depende do <a href="https://br.wordpress.org/plugins/woocommerce/" target="_blank">WooCommerce</a> para funcionar! <br> <a href="javascript:history.back()"> << Voltar</a>');
