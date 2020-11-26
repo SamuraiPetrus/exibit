@@ -11,6 +11,8 @@
 
 //Cadastro dos vetores
 function exibit_vetores_model ( $post_id ) {
+
+    //Verificações de segurança
     if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
     if( !isset( $_POST['exibit_nonce'] ) || !wp_verify_nonce( $_POST['exibit_nonce'], 'exibit_metabox_nonce' ) ) return;
     if( !current_user_can( 'edit_post' ) ) return;
@@ -49,44 +51,69 @@ function exibit_vetores_model ( $post_id ) {
     }
 
     //Upload da imagem de fundo.
-    $preview           = $_FILES['exibit_vetor_preview'];
-    $previews_path     = "wp-content/uploads/previews";
-    $target_dir      = get_home_path() . $previews_path;
-    $target_file     = $target_dir     . '/' . basename( $preview['name'] );
-    $target_url      = get_home_url()  . '/' . $previews_path . '/' . basename( $preview['name'] );
-    $allowFile       = 0;
-    $supported_types = [
-        'image/png',
-        'image/jpeg'
-    ];
+    if ( isset( $_FILES['exibit_vetor_preview'] ) ) {
 
-    //Checando se o arquivo atende os requisitos.
-    if ( $preview['size'] <= 500000 ) { // Tamanho do arquivo está dentro dos limites de tamanho?
-        foreach ( $supported_types as $type ) {
-            if ( $preview['type'] === $type ) { //O formato do arquivo é suportado?
-                $allowFile++;
+        $preview = $_FILES['exibit_vetor_preview'];
+
+        if ( $preview['error'] === 0 ) {
+
+            $previews_path     = "wp-content/uploads/previews";
+            $target_dir      = get_home_path() . $previews_path;
+            $target_file     = $target_dir     . '/' . basename( $preview['name'] );
+            $target_url      = get_home_url()  . '/' . $previews_path . '/' . basename( $preview['name'] );
+            $allowFile       = 0;
+            $supported_types = [
+                'image/png',
+                'image/jpeg'
+            ];
+
+            foreach ( $supported_types as $type ) {
+                if ( $preview['type'] === $type ) { //O formato do arquivo é suportado?
+                    $allowFile++;
+                }
             }
+
+            if ( !$allowFile ) { wp_die( $preview['type'] . ' não é uma extensão suportada! <br> <a href="javascript:history.back()"><-Voltar</a>' ); }
+
+            if ( ! is_dir( $target_dir ) ) {
+                mkdir( $target_dir );
+            } else {
+                if ( file_exists( $target_file ) ) {
+                    wp_die( 'Esse arquivo já existe no site! <br> <a href="javascript:history.back()"><-Voltar</a>' );
+                }
+            }
+
+            if ( move_uploaded_file($preview['tmp_name'], $target_file) ) {
+
+                update_post_meta( $post_id, 'exibit_preview', wp_kses( $target_url, $allowed) );
+
+            } else {
+                wp_die( 'Algo de errado aconteceu. <br> <a target="_blank" href="https://github.com/SamuraiPetrus/exibit/issues/new">Reportar</a> <a href="javascript:history.back()"><-Voltar</a>' );
+            }
+        } else {
+            //Lidando com erros no arquivo.
+            switch ( $preview['error'] ) {
+                case 1 :
+                case 2 :
+                    $message = "O arquivo enviado excede o limite definido de <strong>500KB</strong>.";
+                    break;
+                case 3 :
+                    $message = "O upload do arquivo foi feito parcialmente.";
+                    break;
+                case 6 :
+                    $message = "Pasta temporária ausente.";
+                    break;
+                case 7 :
+                    $message = "Falha em escrever o arquivo em disco.";
+                    break;
+                case 8 :
+                    $message = "Uma extensão do PHP interrompeu o upload do arquivo.";
+                    break;
+                default :
+                    return;
+            }
+            wp_die( $message . '<br> <a href="javascript:history.back()"><-Voltar</a>' );
         }
-    } else {
-        wp_die( 'Tamanho do arquivo excede o máximo de <strong>100KB</strong>. <br> <a href="javascript:history.back()"><-Voltar</a>' );
-    }
-
-    if ( !$allowFile ) { wp_die( $preview['type'] . ' não é uma extensão suportada! <br> <a href="javascript:history.back()"><-Voltar</a>' ); }
-
-    if ( ! is_dir( $target_dir ) ) {
-        mkdir( $target_dir );
-    } else {
-        if ( file_exists( $target_file ) ) {
-            wp_die( 'Esse arquivo já existe no site! <br> <a href="javascript:history.back()"><-Voltar</a>' );
-        }
-    }
-
-    if ( move_uploaded_file($preview['tmp_name'], $target_file) ) {
-
-        update_post_meta( $post_id, 'exibit_preview', wp_kses( $target_url, $allowed) );
-
-    } else {
-        wp_die( 'Algo de errado aconteceu. <br> <a target="_blank" href="https://github.com/SamuraiPetrus/exibit/issues/new">Reportar</a> <a href="javascript:history.back()"><-Voltar</a>' );
     }
 }
 add_action( 'save_post', 'exibit_vetores_model' );

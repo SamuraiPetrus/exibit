@@ -23,6 +23,12 @@ function exibit_metabox_add () {
     );
 }
 
+function is_button_disabled ( $exibit_fields ) {
+    if ( ! is_array( $exibit_fields ) ) {
+        return "disabled";
+    }
+}
+
 function exibit_html ( $the_post ) {
     wp_nonce_field( 'exibit_metabox_nonce', 'exibit_nonce' );
     $exibit_fields = get_post_meta($the_post->ID, 'exibit_fields', true );
@@ -44,14 +50,14 @@ function exibit_html ( $the_post ) {
     <div class="exibit-mask"></div>
     <div class="exibit">
         <div class="settings">
-            <select id="exibit-display" name="exibit-display" disabled>
+            <select id="exibit-display" name="exibit-display" <?= is_button_disabled( $exibit_fields ) ?>>
                 <option value="exibit-display-for-desktop">Desktop</option>
                 <option value="exibit-display-for-tablet">Tablet</option>
                 <option value="exibit-display-for-mobile">Mobile</option>
             </select>
-            <button id="exibit-vetor" type="button" class="button tagadd" name="button" disabled>Adicionar vetor</button>
+            <button id="exibit-vetor" type="button" class="button tagadd" name="button" <?= is_button_disabled( $exibit_fields ) ?>>Adicionar vetor</button>
             <button type="button" name="button" class="button tagadd"><input type="hidden" name="MAX_FILE_SIZE" value="500000" /><input id="exibit_preview" type="file" accept="image/*" value="<?= $exibit_preview ?>" class="upload_preview" name="exibit_vetor_preview" />Upload da imagem</button>
-            <button id="exibit-reset" type="button" class="button tagadd exclude" name="button" disabled>Resetar</button>
+            <button id="exibit-reset" type="button" class="button tagadd exclude" name="button" <?= is_button_disabled( $exibit_fields ) ?>>Resetar</button>
         </div>
         <ul id="exibit_vetores" class="vetores">
           <?php
