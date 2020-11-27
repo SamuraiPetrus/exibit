@@ -77,10 +77,6 @@ function exibit_vetores_model ( $post_id ) {
 
             if ( ! is_dir( $target_dir ) ) {
                 mkdir( $target_dir );
-            } else {
-                if ( file_exists( $target_file ) ) {
-                    wp_die( 'Esse arquivo já existe no site! <br> <a href="javascript:history.back()"><-Voltar</a>' );
-                }
             }
 
             if ( move_uploaded_file($preview['tmp_name'], $target_file) ) {
@@ -90,6 +86,7 @@ function exibit_vetores_model ( $post_id ) {
             } else {
                 wp_die( 'Algo de errado aconteceu. <br> <a target="_blank" href="https://github.com/SamuraiPetrus/exibit/issues/new">Reportar</a> <a href="javascript:history.back()"><-Voltar</a>' );
             }
+
         } else {
             //Lidando com erros no arquivo.
             switch ( $preview['error'] ) {

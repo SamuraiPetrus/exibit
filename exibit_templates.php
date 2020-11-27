@@ -168,6 +168,11 @@ function Exibit_Fontes ( $fontes ) {
 function Style_User_Interface () { ?>
   <style media="screen">
 
+      #exibit-app{
+          opacity: 0;
+          transition: all .5s;
+      }
+
       .exibit-view,
       .flex-viewport,
       .woocommerce-product-gallery {
@@ -219,7 +224,7 @@ function Style_User_Interface () { ?>
       #exibir-previa {
           color: #C2A672;
           fill: #C2A672;
-          display: none;
+          display: block;
           letter-spacing: 2px;
           margin-bottom: 30px;
           font-weight: bolder;
@@ -407,7 +412,8 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
         setTimeout(function(){
 
             //Removendo status de loading do botão de prévia
-            document.getElementById('exibir-previa').style.display = "block";
+            document.getElementById('exibit-app').style.opacity = 1;
+            document.getElementById('exibit-loading').style.display = "none";
 
             //Definindo a prévia
             var gallery = document.querySelector('.woocommerce-product-gallery'),

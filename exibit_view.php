@@ -23,7 +23,7 @@ function exibit_preview_callback () {
     }
 }
 
-add_action('woocommerce_before_single_product_summary', 'exibit_preview_callback');
+add_action('woocommerce_before_single_product', 'exibit_preview_callback');
 
 add_action('woocommerce_before_add_to_cart_button', function () {
     //Inputs do JavaScript
