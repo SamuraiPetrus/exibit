@@ -167,12 +167,6 @@ function Exibit_Fontes ( $fontes ) {
 
 function Style_User_Interface () { ?>
   <style media="screen">
-
-      #exibit-app{
-          opacity: 0;
-          transition: all .5s;
-      }
-
       .exibit-view,
       .flex-viewport,
       .woocommerce-product-gallery {
@@ -382,6 +376,7 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
 
         //Função de salvamento do canvas.
         function takePhotoThenSubmit () {
+
             exibir_previa( document.getElementById('exibir-previa') );
             html2canvas(document.querySelector("#preview"),{
                 /* Parâmetros responsáveis por corrigir o bug da imagem,
@@ -410,10 +405,6 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
 
         //Configuração da estrutura da prévia.
         setTimeout(function(){
-
-            //Removendo status de loading do botão de prévia
-            document.getElementById('exibit-app').style.opacity = 1;
-            document.getElementById('exibit-loading').style.display = "none";
 
             //Definindo a prévia
             var gallery = document.querySelector('.woocommerce-product-gallery'),
@@ -460,7 +451,7 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
                 esconder_previa( document.getElementById('exibir-previa') )
             };
 
-        }, 5000)
+        }, 3000)
 
     </script>
 <?php }
