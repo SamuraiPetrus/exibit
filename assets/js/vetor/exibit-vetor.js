@@ -86,7 +86,7 @@ var exibit_vetor = (function () {
                     vetor_previa.css("color", this.value);
                     break;
                 case "exibit_vetor_tamanho_mobile[]" :
-                case "exibit_vetor_tamanho_ipad[]" :
+                case "exibit_vetor_tamanho_tablet[]" :
                 case "exibit_vetor_tamanho_desktop[]" :
                     vetor_previa.css("font-size", this.value + "px");
                     break;
