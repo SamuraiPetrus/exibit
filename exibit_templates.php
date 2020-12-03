@@ -219,7 +219,6 @@ function Style_Interface () { ?>
           border-top: 1px solid #B3B3B3;
           border-bottom: 1px solid #B3B3B3;
           margin-bottom: 30px;
-          padding: 20px 0;
       }
 
       #exibir-previa {
@@ -233,6 +232,7 @@ function Style_Interface () { ?>
           display: flex;
           justify-content: space-between;
           width: 100%;
+          padding: 20px 0;
       }
 
       .exibit-vetores{
