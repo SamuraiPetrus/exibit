@@ -165,7 +165,7 @@ function Exibit_Fontes ( $fontes ) {
 
 //Templates para interface do usuário
 
-function Style_User_Interface () { ?>
+function Style_Interface () { ?>
   <style media="screen">
       .exibit-view,
       .flex-viewport,
@@ -215,19 +215,36 @@ function Style_User_Interface () { ?>
           object-fit: contain;
       }
 
-      #exibir-previa {
-          color: #C2A672;
-          fill: #C2A672;
-          display: block;
-          letter-spacing: 2px;
+      #exibir-previa-dropdown{
+          border-top: 1px solid #B3B3B3;
+          border-bottom: 1px solid #B3B3B3;
           margin-bottom: 30px;
-          font-weight: bolder;
-          font-size: 15px;
+          padding: 20px 0;
+      }
+
+      #exibir-previa {
+          letter-spacing: 2px;
+          font-size: 18px;
           cursor: pointer;
-          text-decoration: underline;
+          font-weight: lighter;
           text-transform: uppercase;
           width: -moz-fit-content;
           width: fit-content;
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+      }
+
+      .exibit-vetores{
+          margin-top: 30px;
+          display: none;
+      }
+
+      .exibit-vetores .inside{
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          flex-wrap: wrap;
       }
 
       .personalize {
@@ -285,7 +302,7 @@ function Style_User_Interface () { ?>
   </style>
 <?php }
 
-function Preview_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
+function Preview_Interface ( $exibit_preview, $exibit_fields ) { ?>
       <?php if ( (bool) $exibit_preview ) : ?>
           <img class="exibit-preview-img" src="<?=$exibit_preview?>">\
       <?php endif;
@@ -337,7 +354,7 @@ function Preview_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
       ?>
 <?php }
 
-function Inputs_User_Interface ( $exibit_fields, $i ) { ?>
+function Inputs_Interface ( $exibit_fields, $i ) { ?>
     <div class="exibit-vetor-input-field">
         <label class="exibit-vetor-label"><?=$exibit_fields['nomes'][$i]?></label>
         <input type="text" class="exibit-vetor-input" id="<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>" name="<?= 'vetor-input-' . $exibit_fields['vetor_ids'][$i] ?>" value="">
@@ -350,15 +367,35 @@ function Inputs_User_Interface ( $exibit_fields, $i ) { ?>
     </script>
 <?php }
 
-function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
+function Personalize_Interface ( $exibit_preview, $exibit_fields ) { ?>
 
-    <p class="personalize u-marginBottom--inter">Personalize</p>
-    <a href="javascript:void(0)" id="exibir-previa" class="off">Visualizar prévia <i class="fas fa-eye"></i></a>
+    <div id="exibir-previa-dropdown">
+        <div id="exibir-previa" class="off">
+            <span>Personalize</span>
+            <i class="exibit-icon fas fa-plus"></i>
+        </div>
+        <div class="exibit-vetores">
+            <div class="inside">
+                <?php
+                    for ( $i =0; count( $exibit_fields['vetor_ids'] ) > $i; $i++ ) {
+                        Inputs_Interface( $exibit_fields, $i );
+                    }
+                ?>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
 
         function exibir_previa ( thisObj ) {
             document.querySelector(".preview").style.display = "flex";
-            thisObj.innerHTML = 'Esconder prévia <i class="fas fa-eye-slash"></i>';
+            document.querySelector(".exibit-icon").classList.remove('fa-plus');
+            document.querySelector(".exibit-icon").classList.add('fa-minus');
+
+            //Animação de slideDown feita em jQuery
+            jQuery('.exibit-vetores').slideDown();
+
             thisObj.classList.remove( 'off' );
             if ( ! thisObj.classList.contains('on') ) {
                thisObj.classList.add( 'on' );
@@ -367,7 +404,12 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
 
         function esconder_previa ( thisObj ) {
             document.querySelector(".preview").style.display = "none";
-            thisObj.innerHTML = 'Visualizar prévia <i class="fas fa-eye"></i>';
+            document.querySelector(".exibit-icon").classList.remove('fa-minus');
+            document.querySelector(".exibit-icon").classList.add('fa-plus');
+
+            //Animação de slideUp feita em jQuery
+            jQuery('.exibit-vetores').slideUp();
+
             thisObj.classList.remove( 'on' );
             if ( ! thisObj.classList.contains('off') ) {
                thisObj.classList.add( 'off' );
@@ -430,7 +472,7 @@ function Preview_Switch_User_Interface ( $exibit_preview, $exibit_fields ) { ?>
             var preview = document.createElement('figure');
             preview.classList.add('preview');
             preview.id = "preview";
-            preview.innerHTML = '<div class="size-preservation"><?php Preview_User_Interface( $exibit_preview, $exibit_fields ) ?></div>';
+            preview.innerHTML = '<div class="size-preservation"><?php Preview_Interface( $exibit_preview, $exibit_fields ) ?></div>';
 
             if ( atributos.lupa ) {
                 var append_preview = gallery.querySelectorAll('.flex-viewport')[0];

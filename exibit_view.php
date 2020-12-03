@@ -18,7 +18,7 @@ function exibit_preview_callback () {
 
     if ( is_array( $exibit_fields ) ) {
         if ( array_key_exists( 'vetor_ids', $exibit_fields ) ) {
-            Style_User_Interface();
+            Style_Interface();
         }
     }
 }
@@ -33,12 +33,7 @@ add_action('woocommerce_before_add_to_cart_button', function () {
 
     if ( is_array( $exibit_fields ) ) {
         if ( array_key_exists( 'vetor_ids', $exibit_fields ) ) {
-            Preview_Switch_User_Interface( $exibit_preview, $exibit_fields );
-            ?> <div class="exibit-vetores"> <?php
-                for ( $i =0; count( $exibit_fields['vetor_ids'] ) > $i; $i++ ) {
-                    Inputs_User_Interface( $exibit_fields, $i );
-                }
-            ?> </div> <?php
+            Personalize_Interface( $exibit_preview, $exibit_fields );
         }
     }
 });
