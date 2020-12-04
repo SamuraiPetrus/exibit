@@ -389,12 +389,14 @@ function Personalize_Interface ( $exibit_preview, $exibit_fields ) { ?>
     <script type="text/javascript">
 
         function exibir_previa ( thisObj ) {
-            document.querySelector(".preview").style.display = "flex";
             document.querySelector(".exibit-icon").classList.remove('fa-plus');
             document.querySelector(".exibit-icon").classList.add('fa-minus');
 
             //Animação de slideDown feita em jQuery
             jQuery('.exibit-vetores').slideDown();
+
+            //Animação de FadeIn feita em jQuery
+            jQuery('.preview').fadeIn();
 
             thisObj.classList.remove( 'off' );
             if ( ! thisObj.classList.contains('on') ) {
@@ -403,12 +405,14 @@ function Personalize_Interface ( $exibit_preview, $exibit_fields ) { ?>
         }
 
         function esconder_previa ( thisObj ) {
-            document.querySelector(".preview").style.display = "none";
             document.querySelector(".exibit-icon").classList.remove('fa-minus');
             document.querySelector(".exibit-icon").classList.add('fa-plus');
 
             //Animação de slideUp feita em jQuery
             jQuery('.exibit-vetores').slideUp();
+
+            //Animação de FadeOut feita em jQuery
+            jQuery('.preview').fadeOut();
 
             thisObj.classList.remove( 'on' );
             if ( ! thisObj.classList.contains('off') ) {
