@@ -26,21 +26,29 @@ var fontes_do_projeto = (function ( vetor_id ) {
                     if ( child.classList.contains( "exibit-vetor-fontes" ) ) {
                         child.innerHTML = "";
                         //Laço de repetição mediante as fontes cadastradas no site
-                        fontes_object.forEach(function( fonte ){
-                            var id = fonte.id,
-                            url = fonte.exibit_fonte_upload_meta[0],
-                            title = fonte.title.rendered;
+                        if ( fontes_object.length ) {
+                            fontes_object.forEach(function( fonte ){
+                                var id = fonte.id,
+                                url = fonte.exibit_fonte_upload_meta[0],
+                                title = fonte.title.rendered;
 
-                            if ( id && title ) {
-                                var option = document.createElement("option");
-                                option.value = id;
-                                option.setAttribute( 'url', url );
-                                option.setAttribute( 'registered', "false" );
-                                option.innerHTML = title;
+                                if ( id && title ) {
+                                    var option = document.createElement("option");
+                                    option.value = id;
+                                    option.setAttribute( 'url', url );
+                                    option.setAttribute( 'registered', "false" );
+                                    option.innerHTML = title;
 
-                                child.append( option );
-                            }
-                        });
+                                    child.append( option );
+                                }
+                            });
+                        } else {
+                            var notFoundOption = document.createElement('option');
+                            notFoundOption.innerHTML = "Nenhuma fonte encontrada. Adicione novas fontes indo em 'Fontes' > 'Nova Fonte'.";
+                            notFoundOption.setAttribute('selected', 'selected');
+                            notFoundOption.setAttribute('value', '');
+                            child.append(notFoundOption);
+                        }
 
                         FontFamilyChanger( child, vetor_id );
 
