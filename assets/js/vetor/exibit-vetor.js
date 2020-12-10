@@ -1,6 +1,8 @@
 
 //Algoritmo de criação do vetor
 import FontesDoProjeto from '../fontes/exibit-fontes.js';
+import CaracteresMaximos from './exibit-maxchar.js';
+import EscreverVetor from './exibit-write-vector.js';
 import Vetor from './exibit-vetor-library.js';
 import VetorBind from './exibit-vetor-bind.js';
 import GerarID from './exibit-gerar-id.js';
@@ -56,6 +58,7 @@ var exibit_vetor = (function () {
 
     //Adicionando prévia de vetor
     var vetor_previa = $("<div>");
+    vetor_previa.id = "vetor-" + vetor_id;
     vetor_previa.text('Vetor');
     vetor_previa.addClass('vetor-previa');
     vetor_previa.attr('data-x', 0);
@@ -80,7 +83,10 @@ var exibit_vetor = (function () {
         componente_do_painel.oninput = function () {
             switch ( this.name ) {
                 case "exibit_vetor_nome[]" :
-                    vetor_previa.text(this.value);
+                    EscreverVetor( Array.from(estrutura_do_painel.children), vetor_previa, this.value );
+                    break;
+                case "exibit_vetor_max_char[]" :
+                    CaracteresMaximos( Array.from(estrutura_do_painel.children), vetor_previa , this.value );
                     break;
                 case "exibit_vetor_cor[]" :
                     vetor_previa.css("color", this.value);

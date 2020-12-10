@@ -26,6 +26,7 @@ function exibit_vetores_model ( $post_id ) {
     $exibit_vetor_fields = [
         'vetor_ids'         => 'exibit_vetor_id',
         'nomes'             => 'exibit_vetor_nome',
+        'max_chars'         => 'exibit_vetor_max_char',
         'fontes'            => 'exibit_vetor_fontes',
         'cores'             => 'exibit_vetor_cor',
         'tamanhos_mobile'   => 'exibit_vetor_tamanho_mobile',

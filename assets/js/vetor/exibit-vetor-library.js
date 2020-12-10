@@ -11,6 +11,7 @@ var vetor = new Object();
 //Componentes do painel de edição do vetor.
 vetor.painel = {
   'nome'    : '<input type="text" class="exibit-input" placeholder="Nome" name="exibit_vetor_nome[]" value="Vetor" />',
+  'max_char': '<input type="number" class="exibit-input exibit-vetor-tamanho half" placeholder="Máximo de caracteres" name="exibit_vetor_max_char[]" value="" min="0" />',
   'fonte'   : '<select class="exibit-input exibit-vetor-fontes" name="exibit_vetor_fontes[]"><option value="" disabled selected>Carregando fontes...</option></select>',
   'cor'     : '<input type="color" class="exibit-input exibit-vetor-cor half" placeholder="Cor" name="exibit_vetor_cor[]" value="#000000" />',
   'tamanho' : {

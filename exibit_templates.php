@@ -16,6 +16,7 @@ function Vetor_Template ( $exibit_fields, $i ) {
 
         </style>
         <input type="text" class="exibit-input" placeholder="Nome" name="exibit_vetor_nome[]" value="<?= $exibit_fields['nomes'][$i] ?>">
+        <input type="number" class="exibit-input exibit-vetor-tamanho half" placeholder="Máximo de caracteres" name="exibit_vetor_max_char[]" value="<?= $exibit_fields['max_chars'][$i] ?>" min="0">
         <select class="exibit-input exibit-vetor-fontes" name="exibit_vetor_fontes[]">
             <?php
             if ( $fontes->have_posts() ) :
