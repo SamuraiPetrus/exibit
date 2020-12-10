@@ -31,7 +31,7 @@ function sure_popup ( action ) {
 
 function reset_action () {
     //Removendo imagem de prévia
-    document.getElementById("preview_box").innerHTML = '<figcaption>624 x 585</figcaption>';
+    document.getElementById("preview_box").innerHTML = '';
     document.getElementById("exibit_vetores").innerHTML = '';
 
     //Removendo imagem de upload
